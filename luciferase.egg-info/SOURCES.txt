@@ -1,0 +1,8 @@
+README.md
+setup.py
+luciferase/__init__.py
+luciferase/luciferase.py
+luciferase.egg-info/PKG-INFO
+luciferase.egg-info/SOURCES.txt
+luciferase.egg-info/dependency_links.txt
+luciferase.egg-info/top_level.txt
