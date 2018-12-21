@@ -1,2 +1,2 @@
 # luciferase
-Helper functions for luciferase data
+Helper functions and scripts for luciferase data
