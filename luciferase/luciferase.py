@@ -52,7 +52,7 @@ from scipy.stats import ttest_ind
 
 # Constants ====================================================================
 
-JSON_EXAMPLES = """Examples of luciferase reporter data in JSON format:
+JSON_EXAMPLES = '''Examples of luciferase reporter data in JSON format:
 {
   "Non-risk, Fwd": [8.354, 12.725, 8.506],
   "Risk, Fwd": [5.078, 5.038, 5.661],
@@ -68,7 +68,7 @@ JSON_EXAMPLES = """Examples of luciferase reporter data in JSON format:
   "Ref, ALPHA-TC6": [2.01, 1.96, 2.31],
   "Empty, ALPHA-TC6": [1.042, 0.92, 1.042]
 }
-"""
+'''
 
 
 
