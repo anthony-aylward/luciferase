@@ -8,7 +8,8 @@ pip3 install luciferase
 
 ## Examples
 
-A script called `reporter-barplot` for creating bar plots from JSON-formatted data is included. After installing `luciferase`, you can use it like this:
+A script called `reporter-barplot` for creating bar plots from JSON-formatted
+data is included. After installing `luciferase`, you can use it like this:
 ```sh
 reporter-barplot --title "plot title" example.json example.pdf 
 ```
@@ -38,3 +39,7 @@ Examples of luciferase reporter data in JSON format:
   "Empty, ALPHA-TC6": [1.042, 0.92, 1.042]
 }
 ```
+
+The input JSON should contain either five entries or six entries. If it contains
+five entries, the bars of the resulting plot will have a 2-2-1 style. If it
+contains six entries, the bars will have a 2-1-2-1 style.

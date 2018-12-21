@@ -17,12 +17,12 @@ luc_data = {
 }
 luciferase.reporter_barplot(luc_data, 'rs7795896.pdf', title='rs7795896')
 luc_data = {
-  'Alt, MIN6': [5.47, 7.17, 6.15],
-  'Ref, MIN6': [3.16, 3.04, 4.34],
-  'Empty, MIN6': [1.07, 0.83, 0.76],
-  'Alt, ALPHA-TC6': [2.50, 3.47, 3.33],
-  'Ref, ALPHA-TC6': [2.01, 1.96, 2.31],
-  'Empty, ALPHA-TC6': [1.042, 0.92, 1.042]
+    'Alt, MIN6': [5.47, 7.17, 6.15],
+    'Ref, MIN6': [3.16, 3.04, 4.34],
+    'Empty, MIN6': [1.07, 0.83, 0.76],
+    'Alt, ALPHA-TC6': [2.50, 3.47, 3.33],
+    'Ref, ALPHA-TC6': [2.01, 1.96, 2.31],
+    'Empty, ALPHA-TC6': [1.042, 0.92, 1.042]
 }
 luciferase.reporter_barplot(luc_data, 'min6-v-alpha.pdf', title='MIN6 v.Alpha')
 """
