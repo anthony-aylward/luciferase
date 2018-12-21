@@ -6,7 +6,7 @@ Helper functions and scripts for luciferase reporter data
 pip3 install luciferase
 ```
 
-## Examples
+## Command-line interface for barplots
 
 A script called `reporter-barplot` for creating bar plots from JSON-formatted
 data is included. After installing `luciferase`, you can use it like this:
