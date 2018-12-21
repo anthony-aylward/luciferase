@@ -1,4 +1,4 @@
-"""Helper functions and scripts for luciferase data
+"""Helper functions and scripts for luciferase reporter data
 
 Functions
 ---------

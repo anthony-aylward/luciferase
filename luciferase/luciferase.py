@@ -204,4 +204,3 @@ def main():
     with open(args.data, 'r') as f:
         luc_data = json.load(f)
     reporter_barplot(luc_data, args.output, title=args.title)
-    
