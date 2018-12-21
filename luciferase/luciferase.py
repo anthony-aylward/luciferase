@@ -204,18 +204,4 @@ def main():
     with open(args.data, 'r') as f:
         luc_data = json.load(f)
     reporter_barplot(luc_data, args.output, title=args.title)
-
-
-
-
-# Test =========================================================================
-
-if __name__ == '__main__':
-    luc_data = {
-        'Non-risk, Fwd': [8.354, 12.725, 8.506],
-        'Risk, Fwd': [5.078, 5.038, 5.661],
-        'Non-risk, Rev': [9.564, 9.692, 12.622], 
-        'Risk, Rev': [10.777, 11.389, 10.598],
-        'Empty': [1.042, 0.92, 1.042]
-    }
-    reporter_barplot(luc_data, 'rs7795896.pdf', title='rs7795896')
+    
