@@ -215,18 +215,18 @@ def parse_arguments():
     parser.add_argument(
         'data',
         metavar='<path/to/data.json>',
-        help = 'path to a JSON file containing luciferase reporter data'
+        help='path to a JSON file containing luciferase reporter data'
     )
     parser.add_argument(
         'output',
         metavar='<path/to/output.pdf>',
-        help = 'path to the output file'
+        help='path to the output file'
     )
     parser.add_argument(
         '--title',
         metavar='<"plot title">',
         default='',
-        help = 'title for the barplot'
+        help='title for the barplot'
     )
     return parser.parse_args()
 
