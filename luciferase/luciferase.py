@@ -36,6 +36,10 @@ JSON_EXAMPLES = '''Examples of luciferase reporter data in JSON format:
   "Ref, ALPHA-TC6": [2.01, 1.96, 2.31],
   "Empty, ALPHA-TC6": [1.042, 0.92, 1.042]
 }
+
+The input JSON should contain either five entries or six entries. If it contains
+five entries, the bars of the resulting plot will have a 2-2-1 style. If it
+contains six entries, the bars will have a 2-1-2-1 style.
 '''
 
 
