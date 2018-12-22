@@ -5,6 +5,10 @@ Helper functions and scripts for luciferase reporter data
 ```sh
 pip3 install luciferase
 ```
+or
+```sh
+pip3 install --user luciferase
+```
 
 ## Command-line interface for barplots
 

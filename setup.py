@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='luciferase',
-    version='1.0.0',
+    version='1.0.1',
     author='Anthony Aylward',
     author_email='aaylward@eng.ucsd.edu',
     description='Helper functions for luciferase data',
