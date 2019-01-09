@@ -46,8 +46,8 @@ The input JSON should contain either five entries or six entries. If it contains
 five entries, the bars of the resulting plot will have a 2-2-1 style. If it
 contains six entries, the bars will have a 2-1-2-1 style.
 
-Significance indicators will be written above the bars: "***" if p<0.001,
-"**" if p<0.01, "*" if p<0.05, "ns" otherwise.
+Significance indicators will be written above the bars: `***` if p<0.001,
+`**` if p<0.01, `*` if p<0.05, `ns` otherwise.
 '''
 
 
