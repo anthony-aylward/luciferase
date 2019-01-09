@@ -3,6 +3,11 @@
 # luciferase.py
 #===============================================================================
 
+"""Helper functions and scripts for luciferase reporter data"""
+
+
+
+
 # Imports ======================================================================
 
 import argparse
@@ -40,6 +45,9 @@ JSON_EXAMPLES = '''Examples of luciferase reporter data in JSON format:
 The input JSON should contain either five entries or six entries. If it contains
 five entries, the bars of the resulting plot will have a 2-2-1 style. If it
 contains six entries, the bars will have a 2-1-2-1 style.
+
+Significance indicators will be written above the bars: "***" if p<0.001,
+"**" if p<0.01, "*" if p<0.05, "ns" otherwise.
 '''
 
 
@@ -49,7 +57,14 @@ contains six entries, the bars will have a 2-1-2-1 style.
 
 def ttest_indicator(a, b):
     pvalue = ttest_ind(a, b).pvalue
-    return '*' if pvalue < 0.05 else 'ns'
+    if pvalue < 0.001:
+        return '***'
+    elif pvalue < 0.01:
+        return '**'
+    elif pvalue < 0.05:
+        return '*'
+    else:
+        return 'ns'
 
 def reporter_barplot(
     luc_data: dict,
