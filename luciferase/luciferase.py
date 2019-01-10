@@ -57,14 +57,13 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 
 def ttest_indicator(a, b):
     pvalue = ttest_ind(a, b).pvalue
-    if pvalue < 0.001:
-        return '***'
-    elif pvalue < 0.01:
-        return '**'
-    elif pvalue < 0.05:
-        return '*'
-    else:
-        return 'ns'
+    return (
+        '***' if pvalue < 0.001
+        else '**' if pvalue < 0.01
+        else '*' if pvalue < 0.05
+        else 'ns'
+    )
+
 
 def reporter_barplot(
     luc_data: dict,
