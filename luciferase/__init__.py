@@ -2,7 +2,7 @@
 
 Functions
 ---------
-reporter_barplot
+luciferase_barplot
     create a barplot from luciferase reporter data
 
 Examples
@@ -15,7 +15,7 @@ luc_data = {
     'Risk, Rev': [10.777, 11.389, 10.598],
     'Empty': [1.042, 0.92, 1.042]
 }
-luciferase.reporter_barplot(luc_data, 'rs7795896.pdf', title='rs7795896')
+luciferase.luciferase_barplot(luc_data, 'rs7795896.pdf', title='rs7795896')
 luc_data = {
     'Alt, MIN6': [5.47, 7.17, 6.15],
     'Ref, MIN6': [3.16, 3.04, 4.34],
@@ -24,7 +24,7 @@ luc_data = {
     'Ref, ALPHA-TC6': [2.01, 1.96, 2.31],
     'Empty, ALPHA-TC6': [1.042, 0.92, 1.042]
 }
-luciferase.reporter_barplot(luc_data, 'min6-v-alpha.pdf', title='MIN6 v.Alpha')
+luciferase.luciferase_barplot(luc_data, 'min6-v-alpha.pdf', title='MIN6 v.Alpha')
 """
 
-from luciferase.luciferase import reporter_barplot
+from luciferase.luciferase import luciferase_barplot

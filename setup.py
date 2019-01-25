@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='luciferase',
-    version='1.0.5',
+    version='1.0.6',
     author='Anthony Aylward, Joshua Chiou, Mei-Lin Okino',
     author_email='aaylward@eng.ucsd.edu',
     description='Helper functions for luciferase data',
@@ -20,6 +20,6 @@ setuptools.setup(
     ],
     install_requires=['matplotlib', 'pandas', 'scipy', 'seaborn'],
     entry_points={
-        'console_scripts': ['reporter-barplot=luciferase.luciferase:main',]
+        'console_scripts': ['luciferase-barplot=luciferase.luciferase:main',]
     }
 )
