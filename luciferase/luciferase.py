@@ -68,7 +68,6 @@ def ttest_indicator(a, b):
 def luciferase_barplot(
     luc_data: dict,
     output_file_path: str,
-    format='pdf',
     title=''
 ):
     """Create a barplot from luciferase reporter data
@@ -147,8 +146,6 @@ def luciferase_barplot(
     luc_data['mean'] = luc_data.mean(axis=1)
     luc_data['std'] = luc_data.iloc[:,:3].std(axis=1)
     luc_data['xrange'] = xrange
-    #luc_data.columns = ['orientation','ratio']
-    #luc_data
 
     sns.set(font_scale=1.5)
     plt.style.use('seaborn-white')
@@ -215,7 +212,7 @@ def luciferase_barplot(
     ax1.set_ylabel('F$_{luc}$:R$_{luc}$ ratio', fontsize=20)
     ax1.set_title(title, fontsize=24, y=1.1)
 
-    plt.savefig(output_file_path, format=format, bbox_inches='tight')
+    plt.savefig(output_file_path, bbox_inches='tight')
 
 
 def parse_arguments():
@@ -234,7 +231,7 @@ def parse_arguments():
     )
     parser.add_argument(
         'output',
-        metavar='<path/to/output.pdf>',
+        metavar='<path/to/output.{pdf,png}>',
         help='path to the output file'
     )
     parser.add_argument(
