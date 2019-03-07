@@ -113,7 +113,7 @@ def luciferase_barplot(
     )
     """
 
-    luc_data = pd.DataFrame.from_dict(luc_data).transpose()#.melt()
+    luc_data = pd.DataFrame.from_dict(luc_data).transpose()
 
     if len(luc_data.index) == 5:
         xrange = [.65, 1.35, 2.65, 3.35, 4.6]
