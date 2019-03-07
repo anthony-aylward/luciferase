@@ -65,11 +65,7 @@ def ttest_indicator(a, b):
     )
 
 
-def luciferase_barplot(
-    luc_data: dict,
-    output_file_path: str,
-    title=''
-):
+def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
     """Create a barplot from luciferase reporter data
 
     The input dict should contain either five items or six items. If it
