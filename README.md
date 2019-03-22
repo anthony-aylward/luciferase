@@ -1,5 +1,5 @@
 # luciferase
-Tool for plotting luciferase reporter data
+Tool for plotting luciferase reporter data. Thanks due to Joshua Chiou and Mei-lin Okino for inspiration and contributions.
 
 ## Installation
 ```sh
