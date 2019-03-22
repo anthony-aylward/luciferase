@@ -1,5 +1,5 @@
 # luciferase
-Helper functions and scripts for luciferase reporter data
+Tool for plotting luciferase reporter data
 
 ## Installation
 ```sh
