@@ -50,3 +50,7 @@ contains six entries, the bars will have a 2-1-2-1 style.
 
 Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
+
+Here is an example of a plot in the 2-1-2-1 style:
+
+![example barplot](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/figure/rs3787186_luc/dex_vs_untreated.png)
