@@ -200,7 +200,7 @@ def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
         sig_indicators[1],
         ha='center',
         va='bottom',
-        fontsize=20
+        fontsize=24
     )
 
     ax1.set_xticks(xrange)
