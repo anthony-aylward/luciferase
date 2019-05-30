@@ -171,6 +171,7 @@ def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
     
     max_bar_height = max(luc_data['mean'] + luc_data['std'])
     sig_line_height = max_bar_height * 1.1
+    sig_ind_height = max_bar_height * 1.2
     ax1.hlines(
         sig_line_height,
         sig_line_limits[0],
@@ -180,7 +181,7 @@ def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
     )
     ax1.text(
         (sig_line_limits[0] + sig_line_limits[1]) / 2,
-        sig_line_height + 0.25,
+        sig_ind_height,
         sig_indicators[0],
         ha='center',
         va='bottom',
@@ -195,7 +196,7 @@ def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
     )
     ax1.text(
         (sig_line_limits[2] + sig_line_limits[3]) / 2,
-        sig_line_height + 0.25,
+        sig_ind_height,
         sig_indicators[1],
         ha='center',
         va='bottom',
