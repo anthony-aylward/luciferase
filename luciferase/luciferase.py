@@ -65,7 +65,11 @@ def ttest_indicator(a, b):
     )
 
 
-def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
+def luciferase_barplot(
+        luc_data: dict,
+        output_file_path: str,
+        title=''
+):
     """Create a barplot from luciferase reporter data
 
     The input dict should contain either five items or six items. If it
@@ -138,7 +142,29 @@ def luciferase_barplot(luc_data: dict, output_file_path: str, title=''):
                 (luc_data.iloc[3, :], luc_data.iloc[4, :])
             )
         )
-    
+    elif len(luc_data.index) == 12:
+        xrange = [.65, 1.35, 2.05, 3, 3.7, 4.4, 5.35, 6.05, 6.75, 7.7, 8.4, 9.1]
+        color = [
+            '#F781BF',
+            '#FDDAEC',
+            'lightgrey',
+            '#984EA3',
+            '#DECBE4',
+            'lightgrey',
+            '#FF7F00',
+            '#FED9A6',
+            'lightgrey',
+            '#E41A1C',
+            '#FBB4AE',
+            'lightgrey'
+        ]
+        sig_line_limits = xrange[:2] + xrange[3:5] + xrange[6:8] + xrange[9:11]
+        sig_indicators = tuple(
+            ttest_indicator(a, b) for a, b in (
+                (luc_data.iloc[0, :], luc_data.iloc[1, :]),
+                (luc_data.iloc[3, :], luc_data.iloc[4, :])
+            )
+        )
     luc_data['mean'] = luc_data.mean(axis=1)
     luc_data['std'] = luc_data.iloc[:,:3].std(axis=1)
     luc_data['xrange'] = xrange
