@@ -162,7 +162,9 @@ def luciferase_barplot(
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
                 (luc_data.iloc[0, :], luc_data.iloc[1, :]),
-                (luc_data.iloc[3, :], luc_data.iloc[4, :])
+                (luc_data.iloc[3, :], luc_data.iloc[4, :]),
+                (luc_data.iloc[6, :], luc_data.iloc[7, :]),
+                (luc_data.iloc[9, :], luc_data.iloc[10, :]),
             )
         )
     luc_data['mean'] = luc_data.mean(axis=1)
@@ -228,6 +230,37 @@ def luciferase_barplot(
         va='bottom',
         fontsize=24
     )
+    if len(luc_data.index) == 12:
+        ax1.hlines(
+            sig_line_height,
+            sig_line_limits[4],
+            sig_line_limits[5],
+            color='black',
+            lw=3
+        )
+        ax1.text(
+            (sig_line_limits[4] + sig_line_limits[5]) / 2,
+            sig_ind_height,
+            sig_indicators[2],
+            ha='center',
+            va='bottom',
+            fontsize=24
+        )
+        ax1.hlines(
+            sig_line_height,
+            sig_line_limits[6],
+            sig_line_limits[7],
+            color='black',
+            lw=3
+        )
+        ax1.text(
+            (sig_line_limits[6] + sig_line_limits[7]) / 2,
+            sig_ind_height,
+            sig_indicators[3],
+            ha='center',
+            va='bottom',
+            fontsize=24
+        )
 
     ax1.set_xticks(xrange)
     sns.despine(trim=True, offset=10)
