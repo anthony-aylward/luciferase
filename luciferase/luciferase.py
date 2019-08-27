@@ -126,7 +126,7 @@ def ratio_test(a, b, c, d, n=10_000):
         - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
         for num_perm, denom_perm in perm
     )
-    return len(tuple(abs(rd) >= abs(ratio_diff) for rd in bg)) / len(bg)
+    return len(tuple(rd for rd in bg if abs(rd) >= abs(ratio_diff))) / len(bg)
 
 
 def luciferase_barplot(
