@@ -19,6 +19,7 @@ import pandas as pd
 import seaborn as sns
 
 from itertools import chain
+from math import factorial
 from random import sample
 from scipy.stats import ttest_ind
 from statistics import mean
@@ -105,16 +106,21 @@ def ratio_test(a, b, c, d, n=1e5):
     """
 
     ratio_diff = mean(a)/mean(b) - mean(c)/mean(d)
+    
     num = tuple(chain(a, c))
     denom = tuple(chain(b, d))
-    bg = set()
-    while len(bg) < n:
-        num_perm = sample(num, k=len(num))
-        denom_perm = sample(denom, k=len(denom))
-        bg.add(
-            mean(num_perm[:len(a)]) / mean(denom_perm[:len(b)])
-            - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
-        )
+
+    if n > factorial(len(set(num))) * factorial(len(set(denom))):
+        raise RuntimeError('not enough data for n permutations')
+
+    perm = set()
+    while len(perm) < n:
+        perm.add((sample(num, k=len(num)), sample(denom, k=len(denom))))
+    bg = tuple(
+        mean(num_perm[:len(a)]) / mean(denom_perm[:len(b)])
+        - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
+        for num_perm, denom_perm in perm
+    )
     return len(tuple(abs(rd) >= abs(ratio_diff) for rd in bg)) / len(bg)
 
 
