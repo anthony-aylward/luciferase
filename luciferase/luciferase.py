@@ -83,7 +83,7 @@ def ttest_indicator(a, b):
     )
 
 
-def ratio_test(a, b, c, d, n=1e5):
+def ratio_test(a, b, c, d, n=10_000):
     """Perform a permutation test for difference of ratios of means, i.e.:
     
     H0: mean(a)/mean(b) - mean(c)/mean(d) == 0
@@ -115,7 +115,12 @@ def ratio_test(a, b, c, d, n=1e5):
 
     perm = set()
     while len(perm) < n:
-        perm.add((sample(num, k=len(num)), sample(denom, k=len(denom))))
+        perm.add(
+            (
+                tuple(sample(num, k=len(num))), 
+                tuple(sample(denom, k=len(denom)))
+            )
+        )
     bg = tuple(
         mean(num_perm[:len(a)]) / mean(denom_perm[:len(b)])
         - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
