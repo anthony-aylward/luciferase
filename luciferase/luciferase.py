@@ -12,6 +12,7 @@
 
 import argparse
 import json
+import math
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -19,7 +20,6 @@ import pandas as pd
 import seaborn as sns
 
 from itertools import chain
-from math import factorial
 from random import sample
 from scipy.stats import ttest_ind
 from statistics import mean
@@ -105,28 +105,37 @@ def ratio_test(a, b, c, d, n=10_000):
         a p-value
     """
 
-    ratio_diff = mean(a)/mean(b) - mean(c)/mean(d)
+
+
+    log_ratio_diff = (
+        math.log(mean(a))
+        - math.log(mean(b))
+        - math.log(mean(c))
+        + math.log(mean(d))
+    )
     
     num = tuple(chain(a, c))
     denom = tuple(chain(b, d))
 
-    if n > factorial(len(set(num))) * factorial(len(set(denom))):
+    if n > math.factorial(len(set(num))) * math.factorial(len(set(denom))):
         raise RuntimeError('not enough data for n permutations')
 
     perm = set()
     while len(perm) < n:
         perm.add(
-            (
-                tuple(sample(num, k=len(num))), 
-                tuple(sample(denom, k=len(denom)))
-            )
+            (tuple(sample(num, k=len(num))), tuple(sample(denom, k=len(denom))))
         )
     bg = tuple(
-        mean(num_perm[:len(a)]) / mean(denom_perm[:len(b)])
-        - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
+        math.log(mean(num_perm[:len(a)])) 
+        - math.log(mean(denom_perm[:len(b)]))
+        - math.log(mean(num_perm[len(a):]))
+        + math.log(mean(denom_perm[len(b):]))
         for num_perm, denom_perm in perm
     )
-    return len(tuple(rd for rd in bg if abs(rd) >= abs(ratio_diff))) / len(bg)
+    return (
+        len(tuple(lrd for lrd in bg if abs(lrd) >= abs(log_ratio_diff)))
+        / len(bg)
+    )
 
 
 def luciferase_barplot(
