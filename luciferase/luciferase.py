@@ -18,7 +18,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+from itertools import chain
+from random import sample
 from scipy.stats import ttest_ind
+from statistics import mean
 
 
 
@@ -56,6 +59,20 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 # Functions ====================================================================
 
 def ttest_indicator(a, b):
+    """Return a significance indicator string for the result of a t-test.
+
+    Parameters
+    ----------
+    a
+        iterable of measurements from population A
+    b
+        iterable of measurements from population B
+    
+    Returns
+    -------
+    str
+        `***` if p<0.001, `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
+    """
     pvalue = ttest_ind(a, b).pvalue
     return (
         '***' if pvalue < 0.001
@@ -63,6 +80,42 @@ def ttest_indicator(a, b):
         else '*' if pvalue < 0.05
         else 'ns'
     )
+
+
+def ratio_test(a, b, c, d, n=1e5):
+    """Perform a permutation test for difference of ratios of means, i.e.:
+    
+    H0: mean(a)/mean(b) - mean(c)/mean(d) == 0
+    
+    Parameters
+    ----------
+    a
+        iterable of measurements from population A
+    b
+        iterable of measurements from population B
+    c
+        iterable of measurements from population C
+    d
+        iterable of measurements from population D
+    
+    Returns
+    -------
+    float
+        a p-value
+    """
+
+    ratio_diff = mean(a)/mean(b) - mean(c)/mean(d)
+    num = tuple(chain(a, c))
+    denom = tuple(chain(b, d))
+    bg = set()
+    while len(bg) < n:
+        num_perm = sample(num, k=len(num))
+        denom_perm = sample(denom, k=len(denom))
+        bg.add(
+            mean(num_perm[:len(a)]) / mean(denom_perm[:len(b)])
+            - mean(num_perm[len(a):]) / mean(denom_perm[len(b):])
+        )
+    return len(tuple(abs(rd) >= abs(ratio_diff) for rd in bg)) / len(bg)
 
 
 def luciferase_barplot(
