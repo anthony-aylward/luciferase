@@ -85,7 +85,7 @@ def parse_arguments():
     parser.add_argument(
         '--ylab',
         metavar='<label>',
-        default='Alt:Ref ratio',
+        default='Ref:Alt ratio',
         help='label for y axis [Alt:Ref ratio]'
     )
     return parser.parse_args()
@@ -97,7 +97,7 @@ def luciferase_ratioplot(
     title: str = '',
     conf: float = 0.95,
     xlab=['', ''],
-    ylab: str = 'Alt:Ref ratio'
+    ylab: str = 'Ref:Alt ratio'
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -180,7 +180,7 @@ def luciferase_ratioplot(
     sns.despine(trim=True, offset=10)
     ax1.tick_params(axis='both', length=6, width=1.25, bottom=True, left=True)
     ax1.set_xticklabels(xlab, rotation=45, ha='right')
-    ax1.set_ylabel('Alt:Ref ratio', fontsize=20)
+    ax1.set_ylabel('Ref:Alt ratio', fontsize=20)
     ax1.set_title(title, fontsize=24, y=1.1)
 
     plt.savefig(output_file_path, bbox_inches='tight')
