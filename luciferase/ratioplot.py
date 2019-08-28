@@ -139,7 +139,7 @@ def luciferase_ratioplot(
 
     sns.set(font_scale=1.5)
     plt.style.use('seaborn-white')
-    fig, ax1 = plt.subplots(1, 1, figsize=(7, 5), dpi=100)
+    fig, ax1 = plt.subplots(1, 1, figsize=(3, 5), dpi=100)
     bars = ax1.bar(
         ratio_data['xrange'],
         ratio_data['r'],
