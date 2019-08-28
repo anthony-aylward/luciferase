@@ -133,8 +133,8 @@ def luciferase_ratioplot(
     luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     ratio_data = pd.DataFrame(
         (
-            estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:]),
-            estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:])
+            estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
+            estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf)
         )
     )
     ratio_data['xrange'] = [.65, 1.35]
