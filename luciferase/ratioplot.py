@@ -135,7 +135,7 @@ def luciferase_ratioplot(
     ratio_data['ci_hi'] = [ci[1] for ci in ratio_data['ci']]
 
 
-    color = ['#F781BF', '#984EA3']
+    color = ['#FDDAEC', '#DECBE4']
 
     sns.set(font_scale=1.5)
     plt.style.use('seaborn-white')
