@@ -74,6 +74,7 @@ def ttest_indicator(a, b):
     str
         `***` if p<0.001, `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
     """
+
     pvalue = ttest_ind(a, b).pvalue
     return (
         '***' if pvalue < 0.001
@@ -104,8 +105,6 @@ def ratio_test(a, b, c, d, n=10_000):
     float
         a p-value
     """
-
-
 
     log_ratio_diff = (
         math.log(mean(a))
@@ -139,9 +138,9 @@ def ratio_test(a, b, c, d, n=10_000):
 
 
 def luciferase_barplot(
-        luc_data: dict,
-        output_file_path: str,
-        title=''
+    luc_data: dict,
+    output_file_path: str,
+    title=''
 ):
     """Create a barplot from luciferase reporter data
 
@@ -155,8 +154,6 @@ def luciferase_barplot(
         A dictionary containing the luciferase reporter data points
     output_file_path : str
         Path to the output file
-    format : str
-        Format of the output file [pdf]
     title : str
         Title to add to plot
     
