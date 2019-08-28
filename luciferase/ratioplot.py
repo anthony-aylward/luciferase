@@ -79,7 +79,7 @@ def parse_arguments():
         '--xlab',
         metavar='<label>',
         nargs=2,
-        default=['', '']
+        default=['', ''],
         help='labels for x axis'
     )
     return parser.parse_args()
