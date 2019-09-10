@@ -131,18 +131,29 @@ def luciferase_ratioplot(
     """
     
     luc_data = pd.DataFrame.from_dict(luc_data).transpose()
-    ratio_data = pd.DataFrame(
-        (
-            estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
-            estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf)
+    if len(luc_data.index) == 6:
+        color = ['#FDDAEC', '#DECBE4']
+        ratio_data = pd.DataFrame(
+            (
+                estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
+                estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf)
+            )
         )
-    )
-    ratio_data['xrange'] = [.65, 1.35]
+        ratio_data['xrange'] = [.65, 1.35]
+    elif len(luc_data.index) == 12:
+        color = ['#FDDAEC', '#DECBE4', '#FF7F00', '#E41A1C']
+        ratio_data = pd.DataFrame(
+            (
+                estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
+                estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf),
+                estimate_ratio(luc_data.iloc[6,:], luc_data.iloc[7,:], conf=conf),
+                estimate_ratio(luc_data.iloc[9,:], luc_data.iloc[10,:], conf=conf)
+            )
+        )
+        ratio_data['xrange'] = [.65, 1.35, 2.05, 3]
+
     ratio_data['ci_lo'] = [ci[0] for ci in ratio_data['ci']]
     ratio_data['ci_hi'] = [ci[1] for ci in ratio_data['ci']]
-
-
-    color = ['#FDDAEC', '#DECBE4']
 
     sns.set(font_scale=1.5)
     plt.style.use('seaborn-white')
