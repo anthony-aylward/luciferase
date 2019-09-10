@@ -95,7 +95,7 @@ def luciferase_ratioplot(
     output_file_path: str,
     title: str = '',
     conf: float = 0.95,
-    xlab=['', ''],
+    xlab=None,
     ylab: str = 'Ref:Alt ratio'
 ):
     """Plot and compare allelic ratios from luciferase reporter data
@@ -139,8 +139,10 @@ def luciferase_ratioplot(
             )
         )
         ratio_data['xrange'] = [.65, 1.35]
+        if not xlab:
+            xlab = ['', '']
     elif len(luc_data.index) == 12:
-        color = ['#FDDAEC', '#DECBE4', '#FF7F00', '#E41A1C']
+        color = ['#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE']
         ratio_data = pd.DataFrame(
             (
                 estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
@@ -149,7 +151,9 @@ def luciferase_ratioplot(
                 estimate_ratio(luc_data.iloc[9,:], luc_data.iloc[10,:], conf=conf)
             )
         )
-        ratio_data['xrange'] = [.65, 1.35, 2.05, 3]
+        ratio_data['xrange'] = [.65, 1.35, 2.05, 2.75]
+        if not xlab:
+            xlab = ['', '', '', '']
 
     ratio_data['ci_lo'] = [ci[0] for ci in ratio_data['ci']]
     ratio_data['ci_hi'] = [ci[1] for ci in ratio_data['ci']]
