@@ -135,13 +135,10 @@ def luciferase_ratioplot(
 
     luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     n_groups = int(len(luc_data.index) / 3)
-    print(n_groups)
     ratio_data = pd.DataFrame(
         estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)
-        for i in range(0, n_groups, 3)
+        for i in range(0, int(len(luc_data.index)), 3)
     )
-    print(ratio_data)
-    print([.65 + .7 * x for x in range(n_groups)])
     ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
     if not xlab:
         xlab = ['' for _ in range(n_groups)]
