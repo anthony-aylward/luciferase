@@ -84,59 +84,6 @@ def ttest_indicator(a, b):
     )
 
 
-def ratio_test(a, b, c, d, n=10_000):
-    """Perform a permutation test for difference of ratios of means, i.e.:
-    
-    H0: mean(a)/mean(b) - mean(c)/mean(d) == 0
-    
-    Parameters
-    ----------
-    a
-        iterable of measurements from population A
-    b
-        iterable of measurements from population B
-    c
-        iterable of measurements from population C
-    d
-        iterable of measurements from population D
-    
-    Returns
-    -------
-    float
-        a p-value
-    """
-
-    log_ratio_diff = (
-        math.log(mean(a))
-        - math.log(mean(b))
-        - math.log(mean(c))
-        + math.log(mean(d))
-    )
-    
-    num = tuple(chain(a, c))
-    denom = tuple(chain(b, d))
-
-    if n > math.factorial(len(set(num))) * math.factorial(len(set(denom))):
-        raise RuntimeError('not enough data for n permutations')
-
-    perm = set()
-    while len(perm) < n:
-        perm.add(
-            (tuple(sample(num, k=len(num))), tuple(sample(denom, k=len(denom))))
-        )
-    bg = tuple(
-        math.log(mean(num_perm[:len(a)])) 
-        - math.log(mean(denom_perm[:len(b)]))
-        - math.log(mean(num_perm[len(a):]))
-        + math.log(mean(denom_perm[len(b):]))
-        for num_perm, denom_perm in perm
-    )
-    return (
-        len(tuple(lrd for lrd in bg if abs(lrd) >= abs(log_ratio_diff)))
-        / len(bg)
-    )
-
-
 def luciferase_barplot(
     luc_data: dict,
     output_file_path: str,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #===============================================================================
-# luciferase.py
+# ratioplot.py
 #===============================================================================
 
 """Plot and compare the ref / alt ratios of two luciferase reporter assays"""
@@ -25,7 +25,7 @@ from estimateratio import estimate_ratio
 
 # Constants ====================================================================
 
-JSON_EXAMPLE = '''Example of luciferase reporter data in JSON format:
+JSON_EXAMPLE = """Example of luciferase reporter data in JSON format:
 {
   "Alt, dex": [44.6, 37.6, 37.7],
   "Ref, dex": [149.4, 99.7, 124.5],
@@ -35,10 +35,10 @@ JSON_EXAMPLE = '''Example of luciferase reporter data in JSON format:
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
 
-The input JSON should contain six entries
-'''
+The number of entries in the input JSON should be a multiple of 3
+"""
 
-
+COLOR_PALETTE = ['#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE']
 
 
 # Functions ====================================================================
@@ -84,7 +84,7 @@ def parse_arguments():
     parser.add_argument(
         '--ylab',
         metavar='<label>',
-        default='Ref:Alt ratio',
+        default='Ratio',
         help='label for y axis [Alt:Ref ratio]'
     )
     return parser.parse_args()
@@ -96,7 +96,7 @@ def luciferase_ratioplot(
     title: str = '',
     conf: float = 0.95,
     xlab=None,
-    ylab: str = 'Ref:Alt ratio'
+    ylab: str = 'Ratio'
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -110,6 +110,10 @@ def luciferase_ratioplot(
         Title to add to plot
     conf : float
         Confidence level for confidence intervals
+    xlab
+        list of labels for the x-axis, or None
+    ylab : str
+        label for the y-axis
     
     Examples
     --------
@@ -128,32 +132,16 @@ def luciferase_ratioplot(
         title='DEX v untreated'
     )
     """
-    
+
     luc_data = pd.DataFrame.from_dict(luc_data).transpose()
-    if len(luc_data.index) == 6:
-        color = ['#FDDAEC', '#DECBE4']
-        ratio_data = pd.DataFrame(
-            (
-                estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
-                estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf)
-            )
-        )
-        ratio_data['xrange'] = [.65, 1.35]
-        if not xlab:
-            xlab = ['', '']
-    elif len(luc_data.index) == 12:
-        color = ['#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE']
-        ratio_data = pd.DataFrame(
-            (
-                estimate_ratio(luc_data.iloc[0,:], luc_data.iloc[1,:], conf=conf),
-                estimate_ratio(luc_data.iloc[3,:], luc_data.iloc[4,:], conf=conf),
-                estimate_ratio(luc_data.iloc[6,:], luc_data.iloc[7,:], conf=conf),
-                estimate_ratio(luc_data.iloc[9,:], luc_data.iloc[10,:], conf=conf)
-            )
-        )
-        ratio_data['xrange'] = [.65, 1.35, 2.05, 2.75]
-        if not xlab:
-            xlab = ['', '', '', '']
+    n_groups = len(luc_data.index) / 3
+    ratio_data = pd.DataFrame(
+        estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)
+        for i in range(0, n_groups, 3)
+    )
+    ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
+    if not xlab:
+        xlab = ['' for _ in range(n_groups)]
 
     ratio_data['ci_lo'] = [ci[0] for ci in ratio_data['ci']]
     ratio_data['ci_hi'] = [ci[1] for ci in ratio_data['ci']]
@@ -162,33 +150,20 @@ def luciferase_ratioplot(
     plt.style.use('seaborn-white')
     fig, ax1 = plt.subplots(1, 1, figsize=(3, 5), dpi=100)
     bars = ax1.bar(
-        ratio_data['xrange'],
-        ratio_data['r'],
-        edgecolor='black',
-        lw=2,
-        color=color,
-        width=.6
+        ratio_data['xrange'], ratio_data['r'], edgecolor='black', lw=2,
+        color=COLOR_PALETTE[:n_groups], width=.6
     )
     ax1.vlines(
-        ratio_data['xrange'],
-        ratio_data['ci_lo'],
-        ratio_data['ci_hi'],
-        color='black',
-        lw=2
+        ratio_data['xrange'], ratio_data['ci_lo'], ratio_data['ci_hi'],
+        color='black', lw=2
     )
     ax1.hlines(
-        ratio_data['ci_lo'],
-        ratio_data['xrange'] - 0.1,
-        ratio_data['xrange'] + 0.1,
-        color='black',
-        lw=2
+        ratio_data['ci_lo'], ratio_data['xrange'] - 0.1,
+        ratio_data['xrange'] + 0.1, color='black', lw=2
     )
     ax1.hlines(
-        ratio_data['ci_hi'],
-        ratio_data['xrange'] - 0.1,
-        ratio_data['xrange'] + 0.1,
-        color='black',
-        lw=2
+        ratio_data['ci_hi'], ratio_data['xrange'] - 0.1,
+        ratio_data['xrange'] + 0.1, color='black', lw=2
     )
     ax1.set_xticks(ratio_data['xrange'])
     sns.despine(trim=True, offset=10)
@@ -196,7 +171,6 @@ def luciferase_ratioplot(
     ax1.set_xticklabels(xlab, rotation=45, ha='right')
     ax1.set_ylabel(ylab, fontsize=20)
     ax1.set_title(title, fontsize=24, y=1.1)
-
     plt.savefig(output_file_path, bbox_inches='tight')
 
 
@@ -205,10 +179,6 @@ def main():
     with open(args.data, 'r') as f:
         luc_data = json.load(f)
     luciferase_ratioplot(
-        luc_data,
-        args.output,
-        title=args.title,
-        conf=args.conf,
-        xlab=args.xlab,
-        ylab=args.ylab
+        luc_data, args.output, title=args.title, conf=args.conf,
+        xlab=args.xlab, ylab=args.ylab
     )

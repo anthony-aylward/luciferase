@@ -12,6 +12,8 @@ pip3 install --user luciferase
 
 ## Command-line interface for barplots
 
+### Barplots of enhancer activity
+
 A script called `luciferase-barplot` for creating bar plots from JSON-formatted
 data is included. After installing `luciferase`, you can use it like this:
 ```sh
@@ -44,9 +46,10 @@ Examples of luciferase reporter data in JSON format:
 }
 ```
 
-The input JSON should contain either five entries or six entries. If it contains
-five entries, the bars of the resulting plot will have a 2-2-1 style. If it
-contains six entries, the bars will have a 2-1-2-1 style.
+The input JSON should contain either five, six, or twelve entries. If it
+contains five entries, the bars of the resulting plot will have a 2-2-1 style.
+If it contains six entries, the bars will have a 2-1-2-1 style. If twelve,
+the syle will be as with six entries but doubled.
 
 Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
@@ -54,3 +57,16 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 Here is an example of a plot in the 2-1-2-1 style:
 
 ![example barplot](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/figure/rs3787186_luc/dex_vs_untreated.png)
+
+
+### Barplots of allelic ratio
+
+A second script called `luciferase-ratioplot` takes the same input data and
+produces a comparative plot of allelic ratios:
+
+```sh
+luciferase-ratioplot --title "plot title" example.json example.pdf 
+```
+
+For this script, the number of entries in the input JSON should be a multiple
+of 3.
