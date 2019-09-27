@@ -134,7 +134,7 @@ def luciferase_ratioplot(
     """
 
     luc_data = pd.DataFrame.from_dict(luc_data).transpose()
-    n_groups = len(luc_data.index) / 3
+    n_groups = int(len(luc_data.index) / 3)
     ratio_data = pd.DataFrame(
         estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)
         for i in range(0, n_groups, 3)
