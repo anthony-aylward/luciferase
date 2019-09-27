@@ -139,7 +139,7 @@ def luciferase_ratioplot(
         estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)
         for i in range(0, n_groups, 3)
     )
-    ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
+    ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups - 1)]
     if not xlab:
         xlab = ['' for _ in range(n_groups)]
 
