@@ -305,7 +305,7 @@ def parse_arguments():
     )
     parser.add_argument(
         'output',
-        metavar='<path/to/output.{pdf,png}>',
+        metavar='<path/to/output.{pdf,png,svg}>',
         help='path to the output file'
     )
     parser.add_argument(
