@@ -25,7 +25,8 @@ luc_data = {
     'Empty, ALPHA-TC6': [1.042, 0.92, 1.042]
 }
 luciferase.luciferase_barplot(luc_data, 'min6-v-alpha.pdf', title='MIN6 v.Alpha')
+luciferase.luciferase_ratioplot(luc_data, 'min6-v-alpha-ratio.pdf', title='MIN6 v.Alpha')
 """
 
-from luciferase.luciferase import luciferase_barplot, ratio_test
+from luciferase.luciferase import luciferase_barplot
 from luciferase.ratioplot import luciferase_ratioplot
