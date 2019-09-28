@@ -18,6 +18,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import numpy as np
 
 from itertools import chain
 from random import sample
@@ -60,7 +61,33 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 # Functions ====================================================================
 
 def remove_batch_effect(luc_data):
-    pass
+    """Remove batch effects"""
+
+    if isinstance(luc_data, dict):
+        luc_data = pd.DataFrame.from_dict(luc_data).transpose()
+    
+    construct_indices = [
+        i 
+        for pair in (
+            (index, index + 1) for index in range(
+                0, int(len(luc_data.index) - 1), 3
+            )
+        )
+        for i in pair
+    ]
+    construct_data = luc_data.drop('Batch').iloc[construct_indices]
+    batch = tuple(int(x) for x in luc_data.loc['Batch',:])
+    construct_mean = construct_data.mean(axis=1)
+    construct_by_batch = {
+        key: construct_data.iloc[
+            :, [
+                col for col in range(len(construct_data.columns))
+                if batch[col] == key
+            ]
+        ]
+        for key in set(batch)
+    }
+    return construct_by_batch[0], construct_mean
     
 
 
