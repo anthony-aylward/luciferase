@@ -103,7 +103,7 @@ def remove_batch_effect(luc_data):
     normalized_scale_factor_row = tuple(
         scale_factors[b] / scale_factor_mean for b in batch
     )
-    return luc_data.drop('Batch').multiply(scale_factor_row, axis=1)
+    return luc_data.drop('Batch').multiply(normalized_scale_factor_row, axis=1)
 
 
 def ttest_indicator(a, b, batch=None):
