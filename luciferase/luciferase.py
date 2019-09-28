@@ -60,6 +60,14 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 
 # Functions ====================================================================
 
+def scale_factor_lstsq(x, y):
+    """Compute a scale factor"""
+
+    y_flat = pd.concat([y] * len(x.columns), axis=1).values.flatten()
+    x_flat = x.values.flatten()
+    return mean(y_i / x_i for x_i, y_i in zip(x_flat, y_flat))
+
+
 def remove_batch_effect(luc_data):
     """Remove batch effects"""
 
@@ -79,16 +87,20 @@ def remove_batch_effect(luc_data):
     batch = tuple(int(x) for x in luc_data.loc['Batch',:])
     construct_mean = construct_data.mean(axis=1)
     construct_by_batch = {
-        key: construct_data.iloc[
+        b: construct_data.iloc[
             :, [
                 col for col in range(len(construct_data.columns))
-                if batch[col] == key
+                if batch[col] == b
             ]
         ]
-        for key in set(batch)
+        for b in set(batch)
     }
-    return construct_by_batch[0], construct_mean
-    
+    scale_factors = {
+        b: scale_factor_lstsq(x, construct_mean)
+        for b, x in construct_by_batch.items()
+    }
+    scale_factor_row = tuple(scale_factors[b] for b in batch)
+    print(scale_factor_row)
 
 
 def ttest_indicator(a, b, batch=None):
