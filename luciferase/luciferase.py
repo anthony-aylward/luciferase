@@ -99,7 +99,10 @@ def remove_batch_effect(luc_data):
         b: scale_factor_lstsq(x, construct_mean)
         for b, x in construct_by_batch.items()
     }
-    scale_factor_row = tuple(scale_factors[b] for b in batch)
+    scale_factor_mean = mean(scale_factors.values)
+    normalized_scale_factor_row = tuple(
+        scale_factors[b] / scale_factor_mean for b in batch
+    )
     return luc_data.drop('Batch').multiply(scale_factor_row, axis=1)
 
 
@@ -177,6 +180,9 @@ def luciferase_barplot(
     
     if isinstance(luc_data, dict):
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
+
+    if 'Batch' in luc_data.index:
+        luc_data = remove_batch_effect(luc_data)
 
     if len(luc_data.index) == 5:
         xrange = [.65, 1.35, 2.65, 3.35, 4.6]
