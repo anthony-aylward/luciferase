@@ -100,7 +100,7 @@ def remove_batch_effect(luc_data):
         for b, x in construct_by_batch.items()
     }
     scale_factor_row = tuple(scale_factors[b] for b in batch)
-    print(scale_factor_row)
+    return luc_data.drop('Batch').multiply(scale_factor_row, axis=1)
 
 
 def ttest_indicator(a, b, batch=None):
