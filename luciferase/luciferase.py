@@ -59,7 +59,12 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 
 # Functions ====================================================================
 
-def ttest_indicator(a, b):
+def remove_batch_effect(luc_data):
+    pass
+    
+
+
+def ttest_indicator(a, b, batch=None):
     """Return a significance indicator string for the result of a t-test.
 
     Parameters
@@ -85,9 +90,9 @@ def ttest_indicator(a, b):
 
 
 def luciferase_barplot(
-    luc_data: dict,
+    luc_data,
     output_file_path: str,
-    title=''
+    title: str = ''
 ):
     """Create a barplot from luciferase reporter data
 
@@ -97,8 +102,9 @@ def luciferase_barplot(
 
     Parameters
     ----------
-    luc_data : dict
-        A dictionary containing the luciferase reporter data points
+    luc_data
+        A dict or pandas.DataFrame containing the luciferase reporter
+        data points
     output_file_path : str
         Path to the output file
     title : str
@@ -129,8 +135,9 @@ def luciferase_barplot(
         title='MIN6 v.Alpha'
     )
     """
-
-    luc_data = pd.DataFrame.from_dict(luc_data).transpose()
+    
+    if isinstance(luc_data, dict):
+        luc_data = pd.DataFrame.from_dict(luc_data).transpose()
 
     if len(luc_data.index) == 5:
         xrange = [.65, 1.35, 2.65, 3.35, 4.6]
