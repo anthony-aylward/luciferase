@@ -19,7 +19,7 @@ import pandas as pd
 import seaborn as sns
 
 from estimateratio import estimate_ratio
-
+from luciferase.luciferase import remove_batch_effect
 
 
 
@@ -133,7 +133,11 @@ def luciferase_ratioplot(
     )
     """
 
-    luc_data = pd.DataFrame.from_dict(luc_data).transpose()
+    if isinstance(luc_data, dict):
+        luc_data = pd.DataFrame.from_dict(luc_data).transpose()
+    if 'Batch' in luc_data.index:
+        luc_data = remove_batch_effect(luc_data)
+
     n_groups = int(len(luc_data.index) / 3)
     ratio_data = pd.DataFrame(
         estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)

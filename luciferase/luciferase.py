@@ -180,7 +180,6 @@ def luciferase_barplot(
     
     if isinstance(luc_data, dict):
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
-
     if 'Batch' in luc_data.index:
         luc_data = remove_batch_effect(luc_data)
 
