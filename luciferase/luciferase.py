@@ -61,7 +61,21 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 # Functions ====================================================================
 
 def scale_factor_lstsq(x, y):
-    """Compute a scale factor"""
+    """Compute a least-squares best-fit scale factor to transform x to the
+    scale of y.
+
+    Parameters
+    ----------
+    x
+        data frame containing independent variable
+    y
+        data frame containing dependent variable
+
+    Returns
+    -------
+    float
+        The scale factor that best fits x to y
+    """
 
     y_flat = pd.concat([y] * len(x.columns), axis=1).values.flatten()
     x_flat = x.values.flatten()
@@ -69,7 +83,18 @@ def scale_factor_lstsq(x, y):
 
 
 def remove_batch_effect(luc_data):
-    """Remove batch effects"""
+    """Remove batch effects from luciferase data
+
+    Parameters
+    ----------
+    luc_data
+        data frame containing luciferase data points and batch annotations
+
+    Returns
+    -------
+    DataFrame
+        luciferase data re-normalized to remove batch effects
+    """
 
     if isinstance(luc_data, dict):
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
