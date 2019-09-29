@@ -99,7 +99,7 @@ def remove_batch_effect(luc_data):
         b: scale_factor_lstsq(x, construct_mean)
         for b, x in construct_by_batch.items()
     }
-    scale_factor_mean = mean(scale_factors.values)
+    scale_factor_mean = mean(scale_factors.values())
     normalized_scale_factor_row = tuple(
         scale_factors[b] / scale_factor_mean for b in batch
     )
