@@ -16,6 +16,7 @@ import math
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import os
 import pandas as pd
 import seaborn as sns
 import numpy as np
@@ -55,13 +56,21 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
 """
 
-DARK_COLOR_PALETTE = [
-    '#F781BF', '#984EA3', '#FF7F00', '#E41A1C', '#377EB8', '#4DAF4A',
-    'royalblue', 'seagreen'
-]
-LIGHT_COLOR_PALETTE = [
-    '#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE', 'skyblue', 'lightgreen'
-]
+if os.environ.get('LUCIFERASE_DARK_COLORS'):
+    DARK_COLOR_PALETTE = os.environ.get('LUCIFERASE_DARK_COLORS')
+else:
+    DARK_COLOR_PALETTE = [
+        '#F781BF', '#984EA3', '#FF7F00', '#E41A1C', '#377EB8', '#4DAF4A',
+        'royalblue', 'seagreen'
+    ]
+
+if os.environ.get('LUCIFERASE_LIGHT_COLORS'):
+    LIGHT_COLOR_PALETTE = os.environ.get('LUCIFERASE_LIGHT_COLORS')
+else:
+    LIGHT_COLOR_PALETTE = [
+        '#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE', 'skyblue', 'lightgreen'
+    ]
+
 EMPTY_COLOR = 'lightgrey'
 
 
