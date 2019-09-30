@@ -70,4 +70,18 @@ luciferase-ratioplot --title "plot title" example.json example.pdf
 
 For this script, the number of entries in the input JSON should be a multiple
 of 3. The resulting plot shows the estimated allelic ratio of enhancer activity
-with confidence intervals (95% by default).
+with confidence intervals (95% by default). Here is an example input dataset
+and plot:
+
+```
+{
+  "Alt, dex": [44.6, 37.6, 37.7],
+  "Ref, dex": [149.4, 99.7, 124.5],
+  "Empty, dex": [1.1, 1.0, 0.9],
+  "Alt, untreated": [19.7, 16.2, 18.3],
+  "Ref, untreated": [33.2, 30.3, 33.3],
+  "Empty, untreated": [1.0, 1.0, 1.0]
+}
+```
+![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.svg)
+
