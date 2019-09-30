@@ -55,12 +55,12 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
 """
 
+DARK_COLOR_PALETTE = [
+    '#F781BF', '#984EA3', '#FF7F00', '#E41A1C', '#377EB8', '#4DAF4A',
+    'royalblue', 'seagreen'
+]
 LIGHT_COLOR_PALETTE = [
     '#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE', 'skyblue', 'lightgreen'
-]
-DARK_COLOR_PALETTE = [
-    '#F781BF', '#984EA3', '#377EB8', '#4DAF4A', '#FF7F00', '#E41A1C',
-    'royalblue', 'seagreen'
 ]
 EMPTY_COLOR = 'lightgrey'
 
@@ -224,6 +224,9 @@ def luciferase_barplot(
         xrange = [
             i * 2.35 + x for i in range(n_groups) for x in (.65, 1.35, 2.05)
         ]
+        print(n_groups)
+        print(dark_color_palette)
+        print(light_color_palette)
         color = [
             c for i in range(n_groups) for c in (
                 dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
