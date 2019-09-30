@@ -168,7 +168,9 @@ def ttest_indicator(a, b, batch=None):
 def luciferase_barplot(
     luc_data,
     output_file_path: str,
-    title: str = ''
+    title: str = '',
+    dark_color_palette=DARK_COLOR_PALETTE,
+    light_color_palette=LIGHT_COLOR_PALETTE
 ):
     """Create a barplot from luciferase reporter data
 
@@ -224,7 +226,7 @@ def luciferase_barplot(
         ]
         color = [
             c for i in range(n_groups) for c in (
-                DARK_COLOR_PALETTE[i], LIGHT_COLOR_PALETTE[i], EMPTY_COLOR
+                dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
             )
         ]
         sig_line_limits = xrange[:2] + xrange[3:5]
@@ -391,6 +393,20 @@ def parse_arguments():
         default='',
         help='title for the barplot'
     )
+    parser.add_argument(
+        '--dark-colors',
+        metavar='<color>',
+        nargs='+',
+        default=DARK_COLOR_PALETTE,
+        help='palette of dark colors'
+    )
+    parser.add_argument(
+        '--light-colors',
+        metavar='<color>',
+        nargs='+',
+        default=LIGHT_COLOR_PALETTE,
+        help='palette of dark colors'
+    )
     return parser.parse_args()
 
 
@@ -398,4 +414,10 @@ def main():
     args = parse_arguments()
     with open(args.data, 'r') as f:
         luc_data = json.load(f)
-    luciferase_barplot(luc_data, args.output, title=args.title)
+    luciferase_barplot(
+        luc_data,
+        args.output,
+        title=args.title,
+        dark_color_palette=args.dark_colors,
+        light_color_palette=args.light_colors
+    )

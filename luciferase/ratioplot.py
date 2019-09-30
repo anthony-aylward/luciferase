@@ -87,6 +87,13 @@ def parse_arguments():
         default='Ratio',
         help='label for y axis [Alt:Ref ratio]'
     )
+    parser.add_argument(
+        '--colors',
+        metavar='<color>',
+        nargs='+',
+        default=LIGHT_COLOR_PALETTE,
+        help='color palette for plotting'
+    )
     return parser.parse_args()
 
 
@@ -96,7 +103,8 @@ def luciferase_ratioplot(
     title: str = '',
     conf: float = 0.95,
     xlab=None,
-    ylab: str = 'Ratio'
+    ylab: str = 'Ratio',
+    color_palette=LIGHT_COLOR_PALETTE
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -155,7 +163,7 @@ def luciferase_ratioplot(
     fig, ax1 = plt.subplots(1, 1, figsize=(3, 5), dpi=100)
     bars = ax1.bar(
         ratio_data['xrange'], ratio_data['r'], edgecolor='black', lw=2,
-        color=LIGHT_COLOR_PALETTE[:n_groups], width=.6
+        color=color_palette[:n_groups], width=.6
     )
     ax1.vlines(
         ratio_data['xrange'], ratio_data['ci_lo'], ratio_data['ci_hi'],
@@ -184,5 +192,5 @@ def main():
         luc_data = json.load(f)
     luciferase_ratioplot(
         luc_data, args.output, title=args.title, conf=args.conf,
-        xlab=args.xlab, ylab=args.ylab
+        xlab=args.xlab, ylab=args.ylab, color_palette=args.colors
     )
