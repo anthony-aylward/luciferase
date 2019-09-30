@@ -85,3 +85,5 @@ and plot:
 ```
 ![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
 
+## Meta-analysis of luciferase reporter data
+

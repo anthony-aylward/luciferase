@@ -30,7 +30,7 @@ from statistics import mean
 
 # Constants ====================================================================
 
-JSON_EXAMPLES = '''Examples of luciferase reporter data in JSON format:
+JSON_EXAMPLES = """Examples of luciferase reporter data in JSON format:
 {
   "Non-risk, Fwd": [8.354, 12.725, 8.506],
   "Risk, Fwd": [5.078, 5.038, 5.661],
@@ -53,7 +53,16 @@ contains six entries, the bars will have a 2-1-2-1 style.
 
 Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
-'''
+"""
+
+LIGHT_COLOR_PALETTE = [
+    '#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE', 'skyblue', 'lightgreen'
+]
+DARK_COLOR_PALETTE = [
+    '#F781BF', '#984EA3', '#377EB8', '#4DAF4A', '#FF7F00', '#E41A1C',
+    'royalblue', 'seagreen'
+]
+EMPTY_COLOR = 'lightgrey'
 
 
 
@@ -207,57 +216,40 @@ def luciferase_barplot(
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     if 'Batch' in luc_data.index:
         luc_data = remove_batch_effect(luc_data)
-
-    if len(luc_data.index) == 5:
-        xrange = [.65, 1.35, 2.65, 3.35, 4.6]
-        color = ['royalblue', 'skyblue', 'royalblue', 'skyblue', 'lightgrey']
-        sig_line_limits = xrange[:4]
+    
+    if 'empty' in luc_data.index[2].casefold():
+        n_groups = int(len(luc_data.index) / 3)
+        xrange = [
+            i * 2.35 + x for i in range(n_groups) for x in (.65, 1.35, 2.05)
+        ]
+        color = [
+            c for i in range(n_groups) for c in (
+                DARK_COLOR_PALETTE[i], LIGHT_COLOR_PALETTE[i], EMPTY_COLOR
+            )
+        ]
+        sig_line_limits = [x for i in range(n_groups) for x in xrange[i:i + 2]]
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
-                (luc_data.iloc[0, :], luc_data.iloc[1, :]),
-                (luc_data.iloc[2, :], luc_data.iloc[3, :])
+                (luc_data.iloc[i], luc_data.iloc[i + 1])
+                for i in range(0, int(len(luc_data.index)), 3)
             )
         )
-    elif len(luc_data.index) == 6:
-        xrange = [.65, 1.35, 2.05, 3, 3.7, 4.4]
-        color = [
-            'royalblue',
-            'skyblue',
-            'lightgrey',
-            'seagreen',
-            'lightgreen',
-            'lightgrey'
-        ]
-        sig_line_limits = xrange[:2] + xrange[3:5]
-        sig_indicators = tuple(
-            ttest_indicator(a, b) for a, b in (
-                (luc_data.iloc[0, :], luc_data.iloc[1, :]),
-                (luc_data.iloc[3, :], luc_data.iloc[4, :])
+    elif 'empty' in luc_data.index[4].casefold():
+        n_groups = int(len(luc_data.index) / 5)
+        xrange = [
+            i * 5.9 + x for i in range(n_groups) for x in (
+                .65, 1.35, 2.65, 3.35, 4.6
             )
-        )
-    elif len(luc_data.index) == 12:
-        xrange = [.65, 1.35, 2.05, 3, 3.7, 4.4, 5.35, 6.05, 6.75, 7.7, 8.4, 9.1]
-        color = [
-            '#F781BF',
-            '#FDDAEC',
-            'lightgrey',
-            '#984EA3',
-            '#DECBE4',
-            'lightgrey',
-            '#FF7F00',
-            '#FED9A6',
-            'lightgrey',
-            '#E41A1C',
-            '#FBB4AE',
-            'lightgrey'
         ]
-        sig_line_limits = xrange[:2] + xrange[3:5] + xrange[6:8] + xrange[9:11]
+        sig_line_limits = [x for i in range(n_groups) for x in xrange[i:i + 4]]
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
-                (luc_data.iloc[0, :], luc_data.iloc[1, :]),
-                (luc_data.iloc[3, :], luc_data.iloc[4, :]),
-                (luc_data.iloc[6, :], luc_data.iloc[7, :]),
-                (luc_data.iloc[9, :], luc_data.iloc[10, :]),
+                pair
+                for i in range(0, int(len(luc_data.index)), 3)
+                for pair in (
+                    (luc_data.iloc[i], luc_data.iloc[i + 1]),
+                    (luc_data.iloc[i + 2], luc_data.iloc[i + 3]),
+                )
             )
         )
     luc_data['mean'] = luc_data.mean(axis=1)

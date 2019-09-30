@@ -19,7 +19,7 @@ import pandas as pd
 import seaborn as sns
 
 from estimateratio import estimate_ratio
-from luciferase.luciferase import remove_batch_effect
+from luciferase.luciferase import COLOR_PALETTE, remove_batch_effect
 
 
 
@@ -38,7 +38,7 @@ JSON_EXAMPLE = """Example of luciferase reporter data in JSON format:
 The number of entries in the input JSON should be a multiple of 3
 """
 
-COLOR_PALETTE = ['#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE']
+
 
 
 # Functions ====================================================================
@@ -140,7 +140,7 @@ def luciferase_ratioplot(
 
     n_groups = int(len(luc_data.index) / 3)
     ratio_data = pd.DataFrame(
-        estimate_ratio(luc_data.iloc[i,:], luc_data.iloc[i + 1,], conf=conf)
+        estimate_ratio(luc_data.iloc[i], luc_data.iloc[i + 1], conf=conf)
         for i in range(0, int(len(luc_data.index)), 3)
     )
     ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
