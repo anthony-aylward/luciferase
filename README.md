@@ -65,8 +65,9 @@ A second script called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
-luciferase-ratioplot --title "plot title" example.json example.pdf 
+luciferase-ratioplot --title "plot title" example.json example.pdf
 ```
 
 For this script, the number of entries in the input JSON should be a multiple
-of 3.
+of 3. The resulting plot shows the estimated allelic ratio of enhancer activity
+with confidence intervals (95% by default).
