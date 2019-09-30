@@ -227,7 +227,12 @@ def luciferase_barplot(
                 DARK_COLOR_PALETTE[i], LIGHT_COLOR_PALETTE[i], EMPTY_COLOR
             )
         ]
-        sig_line_limits = [x for i in range(n_groups) for x in xrange[i:i + 2]]
+        sig_line_limits = xrange[:2] + xrange[3:5]
+        sig_line_limits = [
+            x
+            for i in range(0, int(len(luc_data.index)), 3)
+            for x in xrange[i:i + 2]
+        ]
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
                 (luc_data.iloc[i], luc_data.iloc[i + 1])
@@ -241,7 +246,11 @@ def luciferase_barplot(
                 .65, 1.35, 2.65, 3.35, 4.6
             )
         ]
-        sig_line_limits = [x for i in range(n_groups) for x in xrange[i:i + 4]]
+        sig_line_limits = [
+            x
+            for i in range(0, int(len(luc_data.index)), 5)
+            for x in xrange[i:i + 4]
+        ]
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
                 pair
