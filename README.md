@@ -83,5 +83,5 @@ and plot:
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
 ```
-![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.svg)
+![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
 
