@@ -224,9 +224,6 @@ def luciferase_barplot(
         xrange = [
             i * 2.35 + x for i in range(n_groups) for x in (.65, 1.35, 2.05)
         ]
-        print(n_groups)
-        print(dark_color_palette)
-        print(light_color_palette)
         color = [
             c for i in range(n_groups) for c in (
                 dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
