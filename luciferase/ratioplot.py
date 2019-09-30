@@ -19,7 +19,7 @@ import pandas as pd
 import seaborn as sns
 
 from estimateratio import estimate_ratio
-from luciferase.luciferase import COLOR_PALETTE, remove_batch_effect
+from luciferase.luciferase import LIGHT_COLOR_PALETTE, remove_batch_effect
 
 
 
@@ -155,7 +155,7 @@ def luciferase_ratioplot(
     fig, ax1 = plt.subplots(1, 1, figsize=(3, 5), dpi=100)
     bars = ax1.bar(
         ratio_data['xrange'], ratio_data['r'], edgecolor='black', lw=2,
-        color=COLOR_PALETTE[:n_groups], width=.6
+        color=LIGHT_COLOR_PALETTE[:n_groups], width=.6
     )
     ax1.vlines(
         ratio_data['xrange'], ratio_data['ci_lo'], ratio_data['ci_hi'],
