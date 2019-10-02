@@ -99,6 +99,34 @@ luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6'
 <img src="example/six3-mp0.png" width="400"/><img src="example/six3-mp1.png" width="400"/>
 
 We can see that the results are fairly consistent in character, but checking
-the y-axis tells us that they are on different scales. Ideally, we would
-like to use all of the data at once for one plot to get the most accurate
-conclusions about allelic effects. We might simply 
+the y-axis tells us that they are on different scales. Intuitively, we might
+conclude from these results that there are allelic effects under all three
+conditions. Ideally though, we would like to use all of the data at once for
+one plot to get the most accurate conclusions about allelic effects.
+
+We might simply combine the data into one dataset, (as [here](example/six3-meta-nobatch.json)) and plot it:
+```sh
+luciferase-barplot six3-meta-nobatch.json six3-meta-nobatch.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C'
+```
+
+![meta-analysis without batch](example/six3-meta-nobatch.png)
+
+The bar heights look reasonable, and the allelic effects appear clear from
+looking at them, but all of the hypothesis tests returned non-significant
+results. What gives?
+
+The answer is that combining data from experiments with different scales
+breaks the assumptions of the significance test (a t-test). To meta-analyze
+these data in a useful way, we first need to re-normalize the two experiments
+to put both of them on the same scale. `luciferase-barplot` will re-normalize
+the data automatically if the dataset includes an additional entry ("Batch")
+indicating the batch of each data point, as in this example:
+[SIX3-META](example/six3-meta.json).
+
+Here is what the results look like when they're re-normalized to correct for
+batch
+```sh
+luciferase-barplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-META'
+```
+
+[meta-analysis with batch](example/six3-meta.png)
