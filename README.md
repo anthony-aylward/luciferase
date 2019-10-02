@@ -83,11 +83,17 @@ and plot:
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
 ```
-![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
+![example ratio plot](example/ratio.png)
 
 ## Meta-analysis
 
 It may be that we have performed two or more experiments
 (from separate minipreps) and wish to meta-analyze the results. As an example,
 let's consider the results of two identical experiments on a regulatory
-variant at the _SIX3_ locus: [SIX3-MP0](example/six3-mp0.json) and [SIX3-MP1](example/six3-mp1.json).
+variant at the _SIX3_ locus: [SIX3-MP0](example/six3-mp0.json) and [SIX3-MP1](example/six3-mp1.json). First we'll plot both datasets separately:
+```sh
+luciferase-barplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP0'
+luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
+```
+
+<img src="example/six3-mp0.png" width="450"/><img src="example/six3-mp1.png" width="450"/>
