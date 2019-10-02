@@ -73,7 +73,7 @@ of 3. The resulting plot shows the estimated allelic ratio of enhancer activity
 with confidence intervals (95% by default). Here is an example input dataset
 and plot:
 
-```
+```json
 {
   "Alt, dex": [44.6, 37.6, 37.7],
   "Ref, dex": [149.4, 99.7, 124.5],
@@ -83,7 +83,7 @@ and plot:
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
 ```
-![example ratio plot](https://github.com/anthony-aylward/luciferase/example/ratio.png)
+![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
 
 ## Meta-analysis
 
@@ -96,7 +96,7 @@ luciferase-barplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6'
 luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
 ```
 
-<img src="example/six3-mp0.png" width="400"/><img src="example/six3-mp1.png" width="400"/>
+<img src="https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp0.png" width="400"/><img src="https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp1.png" width="400"/>
 
 We can see that the results are fairly consistent in character, but checking
 the y-axis tells us that they are on different scales. Intuitively, we might
