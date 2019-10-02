@@ -85,5 +85,9 @@ and plot:
 ```
 ![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
 
-## Meta-analysis of luciferase reporter data
+## Meta-analysis
 
+It may be that we have performed two or more experiments
+(from separate minipreps) and wish to meta-analyze the results. As an example,
+let's consider the results of two identical experiments on a regulatory
+variant at the _SIX3_ locus: [SIX3-MP0](example/six3-mp0.json) and [SIX3-MP1](example/six3-mp1.json).
