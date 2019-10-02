@@ -129,4 +129,4 @@ batch
 luciferase-barplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-META'
 ```
 
-[meta-analysis with batch](example/six3-meta.png)
+![meta-analysis with batch](example/six3-meta.png)
