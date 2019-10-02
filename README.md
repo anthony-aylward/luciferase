@@ -97,3 +97,8 @@ luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6'
 ```
 
 <img src="example/six3-mp0.png" width="400"/><img src="example/six3-mp1.png" width="400"/>
+
+We can see that the results are fairly consistent in character, but checking
+the y-axis tells us that they are on different scales. Ideally, we would
+like to use all of the data at once for one plot to get the most accurate
+conclusions about allelic effects. We might simply 
