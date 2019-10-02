@@ -118,7 +118,7 @@ def remove_batch_effect(luc_data):
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     
     construct_indices = [
-        i 
+        i
         for pair in (
             (index, index + 1) for index in range(
                 0, int(len(luc_data.index) - 1), 3
@@ -238,7 +238,6 @@ def luciferase_barplot(
                 dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
             )
         ]
-        sig_line_limits = xrange[:2] + xrange[3:5]
         sig_line_limits = [
             x
             for i in range(0, int(len(luc_data.index)), 3)
@@ -305,63 +304,18 @@ def luciferase_barplot(
     max_bar_height = max(luc_data['mean'] + luc_data['std'])
     sig_line_height = max_bar_height * 1.1
     sig_ind_height = max_bar_height * 1.15
-    ax1.hlines(
-        sig_line_height,
-        sig_line_limits[0],
-        sig_line_limits[1],
-        color='black',
-        lw=3
-    )
-    ax1.text(
-        (sig_line_limits[0] + sig_line_limits[1]) / 2,
-        sig_ind_height,
-        sig_indicators[0],
-        ha='center',
-        va='bottom',
-        fontsize=24
-    )
-    ax1.hlines(
-        sig_line_height,
-        sig_line_limits[2],
-        sig_line_limits[3],
-        color='black',
-        lw=3
-    )
-    ax1.text(
-        (sig_line_limits[2] + sig_line_limits[3]) / 2,
-        sig_ind_height,
-        sig_indicators[1],
-        ha='center',
-        va='bottom',
-        fontsize=24
-    )
-    if len(luc_data.index) == 12:
+    for i in range(0, len(sig_line_limits), 2):
         ax1.hlines(
             sig_line_height,
-            sig_line_limits[4],
-            sig_line_limits[5],
+            sig_line_limits[i],
+            sig_line_limits[i + 1],
             color='black',
             lw=3
         )
         ax1.text(
-            (sig_line_limits[4] + sig_line_limits[5]) / 2,
+            (sig_line_limits[i] + sig_line_limits[i + 1]) / 2,
             sig_ind_height,
-            sig_indicators[2],
-            ha='center',
-            va='bottom',
-            fontsize=24
-        )
-        ax1.hlines(
-            sig_line_height,
-            sig_line_limits[6],
-            sig_line_limits[7],
-            color='black',
-            lw=3
-        )
-        ax1.text(
-            (sig_line_limits[6] + sig_line_limits[7]) / 2,
-            sig_ind_height,
-            sig_indicators[3],
+            sig_indicators[int(i / 2)],
             ha='center',
             va='bottom',
             fontsize=24
