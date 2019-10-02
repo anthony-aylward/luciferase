@@ -122,6 +122,20 @@ to put both of them on the same scale. `luciferase-barplot` will re-normalize
 the data automatically if the dataset includes an additional entry ("Batch")
 indicating the batch of each data point, as in this example:
 [SIX3-META](example/six3-meta.json).
+```json
+{
+  "Alt, untreated": [19.7, 16.2, 18.3, 6.5, 8.0, 4.4],
+  "Ref, untreated": [33.2, 30.3, 33.3, 8.4, 13.6, 17.1],
+  "Empty, untreated": [1.0, 1.0, 1.0, 1.1, 1.0, 0.9],
+  "Alt, hi_cyt_noTNFA": [11.0, 8.8, 10.1, 3.2, 3.7, 3.3],
+  "Ref, hi_cyt_noTNFA": [17.1, 16.7, 18.8, 7.6, 6.7, 5.5],
+  "Empty, hi_cyt_noTNFA": [1.1, 0.9, 1.0, 1.1, 0.9, 1.0],
+  "Alt, hi_cyt": [10.8, 10.9, 9.1, 3.1, 2.7, 4.0],
+  "Ref, hi_cyt": [17.8, 16.1, 18.0, 7.7, 7.0, 7.1],
+  "Empty, hi_cyt": [1.0, 1.0, 1.0, 1.0, 1.0, 1.1],
+  "Batch": [0, 0, 0, 1, 1, 1]
+}
+```
 
 Here is what the results look like when they're re-normalized to correct for
 batch
