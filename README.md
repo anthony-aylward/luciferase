@@ -83,14 +83,14 @@ and plot:
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
 ```
-![example ratio plot](example/ratio.png)
+![example ratio plot](https://github.com/anthony-aylward/luciferase/example/ratio.png)
 
 ## Meta-analysis
 
 It may be that we have performed two or more experiments
 (from separate minipreps) and wish to meta-analyze the results. As an example,
 let's consider the results of two identical experiments on a regulatory
-variant at the _SIX3_ locus: [SIX3-MP0](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-mp0.json) and [SIX3-MP1](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-mp1.json). First we'll plot both datasets separately:
+variant at the _SIX3_ locus: [SIX3-MP0](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp0.json) and [SIX3-MP1](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp1.json). First we'll plot both datasets separately:
 ```sh
 luciferase-barplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP0'
 luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
@@ -104,12 +104,12 @@ conclude from these results that there are allelic effects under all three
 conditions. Ideally though, we would like to use all of the data at once for
 one plot to get the most accurate conclusions about allelic effects.
 
-We might simply combine the data into one dataset, (as [here](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-meta-nobatch.json)) and plot it:
+We might simply combine the data into one dataset, (as [here](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta-nobatch.json)) and plot it:
 ```sh
 luciferase-barplot six3-meta-nobatch.json six3-meta-nobatch.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C'
 ```
 
-![meta-analysis without batch](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-meta-nobatch.png)
+![meta-analysis without batch](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta-nobatch.png)
 
 The bar heights look reasonable, and the allelic effects appear clear from
 looking at them, but all of the hypothesis tests returned non-significant
@@ -121,7 +121,7 @@ these data in a useful way, we first need to re-normalize the two experiments
 to put both of them on the same scale. `luciferase-barplot` will re-normalize
 the data automatically if the dataset includes an additional entry ("Batch")
 indicating the batch of each data point, as in this example:
-[SIX3-META](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-meta.json).
+[SIX3-META](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta.json).
 ```json
 {
   "Alt, untreated": [19.7, 16.2, 18.3, 6.5, 8.0, 4.4],
@@ -143,4 +143,4 @@ batch
 luciferase-barplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-META'
 ```
 
-![meta-analysis with batch](https://github.com/anthony-aylward/islet-cytokines-outline/raw/master/example/six3-meta.png)
+![meta-analysis with batch](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta.png)
