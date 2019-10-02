@@ -1,0 +1,11 @@
+{
+  "Alt, untreated": [6.5, 8.0, 4.4],
+  "Ref, untreated": [8.4, 13.6, 17.1],
+  "Empty, untreated": [1.1, 1.0, 0.9],
+  "Alt, hi_cyt_noTNFA": [3.2, 3.7, 3.3],
+  "Ref, hi_cyt_noTNFA": [7.6, 6.7, 5.5],
+  "Empty, hi_cyt_noTNFA": [1.1, 0.9, 1.0],
+  "Alt, hi_cyt": [3.1, 2.7, 4.0],
+  "Ref, hi_cyt": [7.7, 7.0, 7.1],
+  "Empty, hi_cyt": [1.0, 1.0, 1.1]
+}
