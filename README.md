@@ -96,4 +96,4 @@ luciferase-barplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6'
 luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
 ```
 
-<img src="example/six3-mp0.png" width="450"/><img src="example/six3-mp1.png" width="450"/>
+<img src="example/six3-mp0.png" width="350"/><img src="example/six3-mp1.png" width="350"/>
