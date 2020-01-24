@@ -81,12 +81,12 @@ def luciferase_swarmplot(
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     if 'Batch' in luc_data.index:
         luc_data = remove_batch_effect(luc_data)
+
+    melted_data = luc_data.transpose().melt()
     
     if 'empty' in luc_data.index[2].casefold():
         n_groups = int(len(luc_data.index) / 3)
-        xrange = [
-            i * 2.35 + x for i in range(n_groups) for x in (.65, 1.35, 2.05)
-        ]
+        xrange = [0,1,2,3,4,5]
         color = [
             c for i in range(n_groups) for c in (
                 dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
@@ -174,12 +174,21 @@ def luciferase_swarmplot(
             va='bottom',
             fontsize=24
         )
-    print(luc_data)
+    
 
-    ax1.set_xticks(xrange)
+    # ax1.set_xticks(xrange)
+    sns.swarmplot(
+        x='variable',
+        y='value',
+        data=melted_data,
+        palette=color,
+        linewidth=1,
+        size=8
+    )
     sns.despine(trim=True, offset=10)
     ax1.tick_params(axis='both', length=6, width=1.25, bottom=True, left=True)
     ax1.set_xticklabels(list(luc_data.index), rotation=45, ha='right')
+    ax1.set_xlabel('')
     ax1.set_ylabel('F$_{luc}$:R$_{luc}$ ratio', fontsize=20)
     ax1.set_title(title, fontsize=24, y=1.1)
 
