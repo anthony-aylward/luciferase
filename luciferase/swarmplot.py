@@ -174,6 +174,7 @@ def luciferase_swarmplot(
             va='bottom',
             fontsize=24
         )
+    print(luc_data)
 
     ax1.set_xticks(xrange)
     sns.despine(trim=True, offset=10)
