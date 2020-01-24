@@ -137,7 +137,7 @@ def luciferase_swarmplot(
         luc_data['mean'],
         edgecolor='black',
         lw=2,
-        color=color,
+        color='white',
         width=.6
     )
     ax1.vlines(
