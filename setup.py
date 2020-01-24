@@ -25,7 +25,7 @@ setuptools.setup(
         'console_scripts': [
             'luciferase-barplot=luciferase.luciferase:main',
             'luciferase-ratioplot=luciferase.ratioplot:main',
-            'luciferase-swarmplot=luciferase.swarmplot:main',
+            'luciferase-swarmplot=luciferase.swarmplot:main'
         ]
     }
 )
