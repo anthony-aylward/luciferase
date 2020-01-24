@@ -30,3 +30,4 @@ luciferase.luciferase_ratioplot(luc_data, 'min6-v-alpha-ratio.pdf', title='MIN6 
 
 from luciferase.luciferase import luciferase_barplot
 from luciferase.ratioplot import luciferase_ratioplot
+from luciferase.swarmplot import luciferase_swarmplot
