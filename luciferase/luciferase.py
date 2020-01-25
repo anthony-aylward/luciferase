@@ -278,8 +278,8 @@ def luciferase_barplot(
                 )
             )
         )
-    luc_data['mean'] = luc_data.mean(axis=1)
-    luc_data['std'] = luc_data.iloc[:,:3].std(axis=1)
+    m, sd = luc_data.mean(axis=1), luc_data.std(axis=1)
+    luc_data['mean'], luc_data['std'] = m, sd
     luc_data['xrange'] = xrange
 
     sns.set(font_scale=1.5)
