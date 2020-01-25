@@ -86,7 +86,7 @@ def luciferase_swarmplot(
     
     if 'empty' in luc_data.index[2].casefold():
         n_groups = int(len(luc_data.index) / 3)
-        xrange = [0,1,2,3,4,5]
+        xrange = list(range(n_groups * 3))
         color = [
             c for i in range(n_groups) for c in (
                 dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
@@ -105,9 +105,11 @@ def luciferase_swarmplot(
         )
     elif 'empty' in luc_data.index[4].casefold():
         n_groups = int(len(luc_data.index) / 5)
-        xrange = [
-            i * 5.9 + x for i in range(n_groups) for x in (
-                .65, 1.35, 2.65, 3.35, 4.6
+        xrange = list(range(n_groups * 5))
+        color = [
+            c for i in range(n_groups) for c in (
+                dark_color_palette[i], light_color_palette[i],
+                dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
             )
         ]
         sig_line_limits = [
