@@ -29,7 +29,8 @@ def luciferase_swarmplot(
     output_file_path: str,
     title: str = '',
     dark_color_palette=DARK_COLOR_PALETTE,
-    light_color_palette=LIGHT_COLOR_PALETTE
+    light_color_palette=LIGHT_COLOR_PALETTE,
+    table=None
 ):
     """Create a swarmplot from luciferase reporter data
 
@@ -129,6 +130,8 @@ def luciferase_swarmplot(
         )
     luc_data['mean'] = luc_data.mean(axis=1)
     luc_data['std'] = luc_data.iloc[:,:3].std(axis=1)
+    if table:
+        luc_data.to_csv(table, sep='\t', index=False)
     luc_data['xrange'] = xrange
 
     sns.set(font_scale=1.5)
@@ -236,6 +239,11 @@ def parse_arguments():
         default=LIGHT_COLOR_PALETTE,
         help='palette of dark colors'
     )
+    parser.add_argument(
+        '--table',
+        metavar='<path/to/file.tsv>',
+        help='write a table of the data'
+    )
     return parser.parse_args()
 
 
@@ -248,5 +256,6 @@ def main():
         args.output,
         title=args.title,
         dark_color_palette=args.dark_colors,
-        light_color_palette=args.light_colors
+        light_color_palette=args.light_colors,
+        table=args.table
     )
