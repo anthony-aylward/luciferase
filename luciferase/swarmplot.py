@@ -30,7 +30,8 @@ def luciferase_swarmplot(
     title: str = '',
     dark_color_palette=DARK_COLOR_PALETTE,
     light_color_palette=LIGHT_COLOR_PALETTE,
-    table=None
+    table=None,
+    transpose=False
 ):
     """Create a swarmplot from luciferase reporter data
 
@@ -88,22 +89,47 @@ def luciferase_swarmplot(
     if 'empty' in luc_data.index[2].casefold():
         n_groups = int(len(luc_data.index) / 3)
         xrange = list(range(n_groups * 3))
-        color = [
-            c for i in range(n_groups) for c in (
-                dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
+        if transpose:
+            luc_data = luc_data.reindex(
+                [
+                    luc_data.index[3*j + i]
+                    for i in range(3)
+                    for j in range(n_groups)
+                ]
             )
-        ]
-        sig_line_limits = [
-            x
-            for i in range(0, int(len(luc_data.index)), 3)
-            for x in xrange[i:i + 2]
-        ]
-        sig_indicators = tuple(
-            ttest_indicator(a, b) for a, b in (
-                (luc_data.iloc[i], luc_data.iloc[i + 1])
+            color = (
+                dark_color_palette
+                + light_color_palette
+                + n_groups * [EMPTY_COLOR]
+            )
+            sig_line_limits = [
+                x
+                for i in tuple(range(0, int(len(luc_data.index)), 2))[:-1]
+                for x in xrange[i:i + 2]
+            ]
+            sig_indicators = tuple(
+                ttest_indicator(a, b) for a, b in (
+                    (luc_data.iloc[i], luc_data.iloc[i + 1])
+                    for i in tuple(range(0, int(len(luc_data.index)), 2))[:-1]
+                )
+            )
+        else:
+            color = [
+                c for i in range(n_groups) for c in (
+                    dark_color_palette[i], light_color_palette[i], EMPTY_COLOR
+                )
+            ]
+            sig_line_limits = [
+                x
                 for i in range(0, int(len(luc_data.index)), 3)
+                for x in xrange[i:i + 2]
+            ]
+            sig_indicators = tuple(
+                ttest_indicator(a, b) for a, b in (
+                    (luc_data.iloc[i], luc_data.iloc[i + 1])
+                    for i in range(0, int(len(luc_data.index)), 3)
+                )
             )
-        )
     elif 'empty' in luc_data.index[4].casefold():
         n_groups = int(len(luc_data.index) / 5)
         xrange = list(range(n_groups * 5))
@@ -244,6 +270,11 @@ def parse_arguments():
         metavar='<path/to/file.tsv>',
         help='write a table of the data'
     )
+    parser.add_argument(
+        '--transpose',
+        action='store_true',
+        help='Transpose alleles with treatments'
+    )
     return parser.parse_args()
 
 
@@ -257,5 +288,6 @@ def main():
         title=args.title,
         dark_color_palette=args.dark_colors,
         light_color_palette=args.light_colors,
-        table=args.table
+        table=args.table,
+        transpose=args.transpose
     )
