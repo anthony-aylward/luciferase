@@ -83,20 +83,21 @@ def luciferase_swarmplot(
         luc_data = pd.DataFrame.from_dict(luc_data).transpose()
     if 'Batch' in luc_data.index:
         luc_data = remove_batch_effect(luc_data)
-
+    
+    if transpose:
+        luc_data = luc_data.reindex(
+            [
+                luc_data.index[3*j + i]
+                for i in range(3)
+                for j in range(n_groups)
+            ]
+        )
     melted_data = luc_data.transpose().melt()
     
     if 'empty' in luc_data.index[2].casefold():
         n_groups = int(len(luc_data.index) / 3)
         xrange = list(range(n_groups * 3))
         if transpose:
-            luc_data = luc_data.reindex(
-                [
-                    luc_data.index[3*j + i]
-                    for i in range(3)
-                    for j in range(n_groups)
-                ]
-            )
             color = (
                 dark_color_palette
                 + light_color_palette

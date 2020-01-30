@@ -166,7 +166,6 @@ def ttest_indicator(a, b, batch=None):
     """
 
     pvalue = ttest_ind(a, b).pvalue
-    print(pvalue)
     return (
         '***' if pvalue < 0.001
         else '**' if pvalue < 0.01
