@@ -154,8 +154,8 @@ def luciferase_swarmplot(
                 )
             )
         )
-    luc_data['mean'] = luc_data.mean(axis=1)
-    luc_data['std'] = luc_data.iloc[:,:3].std(axis=1)
+    m, sd = luc_data.mean(axis=1), luc_data.std(axis=1)
+    luc_data['mean'], luc_data['std'] = m, sd
     if table:
         luc_data.to_csv(table, sep='\t', index=False)
     luc_data['xrange'] = xrange
