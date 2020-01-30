@@ -84,23 +84,20 @@ def luciferase_swarmplot(
     if 'Batch' in luc_data.index:
         luc_data = remove_batch_effect(luc_data)
     
-    if transpose:
-        luc_data = luc_data.reindex(
-            [
-                luc_data.index[3*j + i]
-                for i in range(3)
-                for j in range(n_groups)
-            ]
-        )
-    melted_data = luc_data.transpose().melt()
-    
     if 'empty' in luc_data.index[2].casefold():
         n_groups = int(len(luc_data.index) / 3)
         xrange = list(range(n_groups * 3))
         if transpose:
+            luc_data = luc_data.reindex(
+                [
+                    luc_data.index[3*j + i]
+                    for i in range(3)
+                    for j in range(n_groups)
+                ]
+            )
             color = (
-                dark_color_palette
-                + light_color_palette
+                dark_color_palette[:n_groups]
+                + light_color_palette[:n_groups]
                 + n_groups * [EMPTY_COLOR]
             )
             sig_line_limits = [
@@ -155,6 +152,7 @@ def luciferase_swarmplot(
                 )
             )
         )
+    melted_data = luc_data.transpose().melt()
     m, sd = luc_data.mean(axis=1), luc_data.std(axis=1)
     luc_data['mean'], luc_data['std'] = m, sd
     if table:
@@ -206,7 +204,6 @@ def luciferase_swarmplot(
             va='bottom',
             fontsize=24
         )
-    
 
     # ax1.set_xticks(xrange)
     sns.swarmplot(
