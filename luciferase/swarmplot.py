@@ -17,7 +17,7 @@ import seaborn as sns
 
 from luciferase.luciferase import (
     LIGHT_COLOR_PALETTE, DARK_COLOR_PALETTE, EMPTY_COLOR, JSON_EXAMPLES,
-    remove_batch_effect, ttest_indicator
+    load_data, remove_batch_effect, ttest_indicator
 )
 
 
@@ -278,8 +278,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    with open(args.data, 'r') as f:
-        luc_data = json.load(f)
+    luc_data = load_data(args.data)
     luciferase_swarmplot(
         luc_data,
         args.output,

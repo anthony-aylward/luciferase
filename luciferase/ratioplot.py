@@ -19,8 +19,9 @@ import pandas as pd
 import seaborn as sns
 
 from estimateratio import estimate_ratio
-from luciferase.luciferase import LIGHT_COLOR_PALETTE, remove_batch_effect
-
+from luciferase.luciferase import (
+    LIGHT_COLOR_PALETTE, load_data, remove_batch_effect
+)
 
 
 # Constants ====================================================================
@@ -111,7 +112,8 @@ def luciferase_ratioplot(
     Parameters
     ----------
     luc_data : dict
-        A dictionary containing the luciferase reporter data points
+        A dictionary or pandas.DataFrame containing the luciferase reporter
+        data points
     output_file_path : str
         Path to the output file
     title : str
@@ -188,8 +190,7 @@ def luciferase_ratioplot(
 
 def main():
     args = parse_arguments()
-    with open(args.data, 'r') as f:
-        luc_data = json.load(f)
+    luc_data = load_data(args.data)
     luciferase_ratioplot(
         luc_data, args.output, title=args.title, conf=args.conf,
         xlab=args.xlab, ylab=args.ylab, color_palette=args.colors

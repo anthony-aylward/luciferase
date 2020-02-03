@@ -379,10 +379,24 @@ def parse_arguments():
     return parser.parse_args()
 
 
+def load_data(filepath, **kwargs):
+    ext = filepath.split('.')[-1]
+    if ext == 'json':
+        with open(filepath, 'r') as f:
+            return pd.DataFrame.from_dict(json.load(f)).transpose()
+    elif ext == 'csv':
+        return pd.read_csv(filepath, **kwargs).transpose()
+    elif ext == 'tsv':
+        return pd.read_table(filepath, **kwargs).transpose()
+    elif ext in {'xls', 'xlsx'}:
+        return pd.read_excel(filepath, **kwargs).transpose()
+    else:
+        raise RuntimeError('Invalid file extension')
+
+
 def main():
     args = parse_arguments()
-    with open(args.data, 'r') as f:
-        luc_data = json.load(f)
+    luc_data = load_data(args.data)
     luciferase_barplot(
         luc_data,
         args.output,
