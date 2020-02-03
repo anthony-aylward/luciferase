@@ -28,12 +28,12 @@ from luciferase.luciferase import (
 
 JSON_EXAMPLE = """Example of luciferase reporter data in JSON format:
 {
-  "Alt, dex": [44.6, 37.6, 37.7],
-  "Ref, dex": [149.4, 99.7, 124.5],
-  "Empty, dex": [1.1, 1.0, 0.9],
-  "Alt, untreated": [19.7, 16.2, 18.3],
   "Ref, untreated": [33.2, 30.3, 33.3],
+  "Alt, untreated": [19.7, 16.2, 18.3],
   "Empty, untreated": [1.0, 1.0, 1.0]
+  "Ref, dex": [149.4, 99.7, 124.5],
+  "Alt, dex": [44.6, 37.6, 37.7],
+  "Empty, dex": [1.1, 1.0, 0.9],
 }
 
 The number of entries in the input JSON should be a multiple of 3
@@ -95,6 +95,11 @@ def parse_arguments():
         default=LIGHT_COLOR_PALETTE,
         help='color palette for plotting'
     )
+    parser.add_argument(
+        '--invert',
+        action='store_true',
+        help='invert ratios'
+    )
     return parser.parse_args()
 
 
@@ -105,7 +110,8 @@ def luciferase_ratioplot(
     conf: float = 0.95,
     xlab=None,
     ylab: str = 'Ratio',
-    color_palette=LIGHT_COLOR_PALETTE
+    color_palette=LIGHT_COLOR_PALETTE,
+    invert=False
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -124,21 +130,25 @@ def luciferase_ratioplot(
         list of labels for the x-axis, or None
     ylab : str
         label for the y-axis
+    color_palette
+        color pallete to use for bars
+    invert : bool
+        if True, invert ratios
     
     Examples
     --------
     import luciferase
     luc_data = {
-        'Alt, dex': [44.6, 37.6, 37.7],
-        'Ref, dex': [149.4, 99.7, 124.5],
-        'Empty, dex': [1.1, 1.0, 0.9],
-        'Alt, untreated': [19.7, 16.2, 18.3],
         'Ref, untreated': [33.2, 30.3, 33.3],
+        'Alt, untreated': [19.7, 16.2, 18.3],
         'Empty, untreated': [1.0, 1.0, 1.0]
+        'Ref, dex': [149.4, 99.7, 124.5],
+        'Alt, dex': [44.6, 37.6, 37.7],
+        'Empty, dex': [1.1, 1.0, 0.9],
     }
     luciferase.luciferase_ratioplot(
         luc_data,
-        'dex-v-untreated.pdf',
+        'untreated-v-dex.pdf',
         title='DEX v untreated'
     )
     """
@@ -150,7 +160,11 @@ def luciferase_ratioplot(
 
     n_groups = int(len(luc_data.index) / 3)
     ratio_data = pd.DataFrame(
-        estimate_ratio(luc_data.iloc[i], luc_data.iloc[i + 1], conf=conf)
+        estimate_ratio(
+            luc_data.iloc[i + invert],
+            luc_data.iloc[i + 1 - invert],
+            conf=conf
+        )
         for i in range(0, int(len(luc_data.index)), 3)
     )
     ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
@@ -193,5 +207,6 @@ def main():
     luc_data = load_data(args.data)
     luciferase_ratioplot(
         luc_data, args.output, title=args.title, conf=args.conf,
-        xlab=args.xlab, ylab=args.ylab, color_palette=args.colors
+        xlab=args.xlab, ylab=args.ylab, color_palette=args.colors,
+        invert=args.invert
     )
