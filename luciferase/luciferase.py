@@ -59,17 +59,12 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 if os.environ.get('LUCIFERASE_DARK_COLORS'):
     DARK_COLOR_PALETTE = os.environ.get('LUCIFERASE_DARK_COLORS')
 else:
-    DARK_COLOR_PALETTE = [
-        '#F781BF', '#984EA3', '#FF7F00', '#E41A1C', '#377EB8', '#4DAF4A',
-        'royalblue', 'seagreen'
-    ]
+    DARK_COLOR_PALETTE = sns.color_palette().as_hex()
 
 if os.environ.get('LUCIFERASE_LIGHT_COLORS'):
     LIGHT_COLOR_PALETTE = os.environ.get('LUCIFERASE_LIGHT_COLORS')
 else:
-    LIGHT_COLOR_PALETTE = [
-        '#FDDAEC', '#DECBE4', '#FED9A6', '#FBB4AE', '#B3CDE3', '#CCEBC5', 'skyblue', 'lightgreen'
-    ]
+    LIGHT_COLOR_PALETTE = sns.color_palette('pastel').as_hex()
 
 EMPTY_COLOR = 'lightgrey'
 
@@ -348,8 +343,8 @@ def parse_arguments():
     )
     parser.add_argument(
         'data',
-        metavar='<path/to/data.json>',
-        help='path to a JSON file containing luciferase reporter data'
+        metavar='<path/to/data.{csv,tsv,json,xls,xlsx}>',
+        help='path to a file containing luciferase reporter data'
     )
     parser.add_argument(
         'output',

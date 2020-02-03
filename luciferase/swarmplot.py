@@ -235,8 +235,8 @@ def parse_arguments():
     )
     parser.add_argument(
         'data',
-        metavar='<path/to/data.json>',
-        help='path to a JSON file containing luciferase reporter data'
+        metavar='<path/to/data.{csv,tsv,json,xls,xlsx}>',
+        help='path to a file containing luciferase reporter data'
     )
     parser.add_argument(
         'output',
