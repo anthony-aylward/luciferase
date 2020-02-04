@@ -107,8 +107,8 @@ Alt, dex	Ref, dex	Empty, dex	Alt, untreated	Ref, untreated	Empty, untreated
 37.6	99.7	1.0	16.2	30.3	1.0
 37.7	124.5	0.9	18.3	33.3	1.0
 ```
-![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
-![example inverted ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio-invert.png)
+
+<img src="https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png" width="300"/><img src="https://github.com/anthony-aylward/luciferase/raw/master/example/ratio-invert.png" width="300"/>
 
 ## Meta-analysis
 
