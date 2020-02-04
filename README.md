@@ -18,7 +18,11 @@ A script called `luciferase-barplot` for creating bar plots from JSON-formatted
 or tabular (TSV) data is included. After installing `luciferase`, you can use
 it like this:
 ```sh
-luciferase-barplot --title "plot title" example.json example.pdf 
+luciferase-barplot example.json example.pdf
+luciferase-barplot example.tsv example.png
+luciferase-barplot example.csv example.svg
+luciferase-barplot example.xls example.pdf
+luciferase-barplot example.xlsx example.png
 ```
 
 See also the help message:
@@ -75,10 +79,10 @@ A second script called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
-luciferase-ratioplot --title "plot title" example.json example.pdf
+luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" ratio.json ratio-invert.png
 ```
 ```sh
-luciferase-ratioplot --title "plot title" example.tsv example.pdf
+luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --invert ratio.json ratio-invert.png
 ```
 
 The resulting plot shows the estimated allelic ratio of enhancer activity
@@ -104,6 +108,7 @@ Alt, dex	Ref, dex	Empty, dex	Alt, untreated	Ref, untreated	Empty, untreated
 37.7	124.5	0.9	18.3	33.3	1.0
 ```
 ![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
+![example inverted ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio-invert.png)
 
 ## Meta-analysis
 
