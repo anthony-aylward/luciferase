@@ -1,8 +1,8 @@
 {
-  "Alt, dex": [44.6, 37.6, 37.7],
-  "Ref, dex": [149.4, 99.7, 124.5],
-  "Empty, dex": [1.1, 1.0, 0.9],
-  "Alt, untreated": [19.7, 16.2, 18.3],
-  "Ref, untreated": [33.2, 30.3, 33.3],
-  "Empty, untreated": [1.0, 1.0, 1.0]
+  "Ref, control": [33.2, 30.3, 33.3],
+  "Alt, control": [19.7, 16.2, 18.3],
+  "Empty, control": [1.0, 1.0, 1.0],
+  "Ref, dexamethasone": [149.4, 99.7, 124.5],
+  "Alt, dexamethasone": [44.6, 37.6, 37.7],
+  "Empty, dexamethasone": [1.1, 1.0, 0.9]
 }
