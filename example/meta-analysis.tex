@@ -7,29 +7,24 @@
 
 \begin{document}
 
-The beta-binomial value for $k$ is:
-\[\int_0^1 L_{n,k}(p)\pi_{\alpha,\beta}(p)dp\]
+Let $X_{jk} \sim \mathcal{N}_{jk}$ where
+$\mathcal{N}_{jk} = \mathcal{N}(\theta_k\mu_j,\theta_k^2\sigma_j)$
+and $\theta_k$ is a random variable with $E[\theta_k] = 1$.
+Let $x_{ijk}$ be the $i$'th normalized $F_{luc}/R_{luc}$ value of the $j$'th
+configuration from the $k$'th batch, drawn from $X_{jk}$.
 
-Let $\Pi_{\alpha,\beta}$ be the integral of $\pi_{\alpha,\beta}$. (with respect
-to R, we have $\pi=\texttt{dbeta()}$, $\Pi=\texttt{pbeta()}$, $\Pi^{-1}=\texttt{qbeta()}$)
+We wish to test whether or not $\mu_0 = \mu_1$. To do this, we will first
+normalize out $\theta_k$ and then apply a t-test.
 
-By change of variables:
-\begin{align*}
-  \int_0^1 L_{n,k}(\Pi_{\alpha,\beta}^{-1}(u))du &= \int_{\Pi_{\alpha,\beta}(0)}^{\Pi_{\alpha,\beta}(1)} L_{n,k}(\Pi_{\alpha,\beta}^{-1}(u))du \\
-  &= \int_0^1 L_{n,k}(\Pi_{\alpha,\beta}^{-1}(\Pi_{\alpha,\beta}(p)))\pi_{\alpha,\beta}(p)dp \\
-  &= \int_0^1 L_{n,k}(p)\pi_{\alpha,\beta}(p)dp \\
-\end{align*}
-
-I would like to integrate:
-\[\int_0^1 L_{n_1,k_1}(\Pi_{\alpha_1,\beta_1}^{-1}(u))L_{n_2,k_2}(\Pi_{\alpha_2,\beta_2}^{-1}(u))du\]
-
-This is:
-\[\binom{n_1}{k_1}\binom{n_2}{k_2}\int_0^1 \Pi_1^{-1}(u)^{k_1}(1-\Pi_1^{-1}(u))^{n_1-k_1} \Pi_2^{-1}(u)^{k_2}(1-\Pi_2^{-1}(u))^{n_2-k_2}du\]
-Where:
-\[\Pi_i^{-1}(u) = \Pi_{\alpha_i,\beta_i}^{-1}(u)\]
-
-We can probably solve this with adaptive quadrature in R, i.e. \texttt{integrate()}.
-
+Since $E[\theta_k] = 1$ and $E[X_{jk}] = \theta_k\mu_j$, we can estimate
+$\mu_j$ as $\bar{\mu}_j \approx \frac{1}{N_iN_k}\sum_{i,k}x_{ijk}$. Then we 
+let $\hat{x}_{ijk} = \eta_k x_{ijk}$ where $\eta_k$
+minimizes $\sum_{i,j} (\eta_k x_{ijk} - \bar{\mu}_j)^2$. Note that
+$\eta_k \theta_k \approx 1$.
+The values $\hat{x}_{ijk}$ then have distributon
+$\eta_k \mathcal{N}_{jk} \approx \mathcal{N}(\mu_j, \sigma_j)$. This means
+the hypothesis $\mu_0 = \mu_1$ can be tested using the populations
+$\hat{x}_{i0k}$ and $\hat{x}_{i1k}$.
 
 \end{document}
 This is never printed
