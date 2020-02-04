@@ -14,8 +14,8 @@ pip3 install --user luciferase
 
 ### Barplots of enhancer activity
 
-A script called `luciferase-barplot` for creating bar plots is included.
-After installing `luciferase`, you can use it like this:
+A command-line tool called `luciferase-barplot` for creating bar plots is
+included. After installing `luciferase`, you can use it like this:
 ```sh
 luciferase-barplot example.json example.pdf
 luciferase-barplot example.csv example.png
@@ -75,7 +75,7 @@ Here are the resulting plots
 
 ### Barplots of allelic ratio
 
-A second script called `luciferase-ratioplot` takes the same input data and
+A second tool called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
