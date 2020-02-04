@@ -15,7 +15,8 @@ pip3 install --user luciferase
 ### Barplots of enhancer activity
 
 A script called `luciferase-barplot` for creating bar plots from JSON-formatted
-data is included. After installing `luciferase`, you can use it like this:
+or tabular (TSV) data is included. After installing `luciferase`, you can use
+it like this:
 ```sh
 luciferase-barplot --title "plot title" example.json example.pdf 
 ```
@@ -45,11 +46,19 @@ Examples of luciferase reporter data in JSON format:
   "Empty, ALPHA-TC6": [1.042, 0.92, 1.042]
 }
 ```
-
-The input JSON should contain either five, six, or twelve entries. If it
-contains five entries, the bars of the resulting plot will have a 2-2-1 style.
-If it contains six entries, the bars will have a 2-1-2-1 style. If twelve,
-the syle will be as with six entries but doubled.
+Examples of luciferase reporter data in TSV format:
+```
+Non-risk, Fwd	Risk, Fwd	Non-risk, Rev	Risk, Rev	Empty
+8.354	5.078	9.564	10.777	1.042
+12.725	5.038	9.692	11.389	0.92
+8.506	5.661	12.622	10.598	1.042
+```
+```
+Alt, MIN6	Ref, MIN6	Empty, MIN6	Alt, ALPHA-TC6	Ref, ALPHA-TC6	Empty, ALPHA-TC6
+5.47	3.16	1.07	2.5	2.01	1.042
+7.17	3.04	0.83	3.47	1.96	0.92
+6.15	4.34	0.76	3.33	2.31	1.042
+```
 
 Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
@@ -67,12 +76,16 @@ produces a comparative plot of allelic ratios:
 ```sh
 luciferase-ratioplot --title "plot title" example.json example.pdf
 ```
+```sh
+luciferase-ratioplot --title "plot title" example.tsv example.pdf
+```
 
 For this script, the number of entries in the input JSON should be a multiple
 of 3. The resulting plot shows the estimated allelic ratio of enhancer activity
 with confidence intervals (95% by default). Here is an example input dataset
 and plot:
 
+JSON:
 ```json
 {
   "Alt, dex": [44.6, 37.6, 37.7],
@@ -82,6 +95,13 @@ and plot:
   "Ref, untreated": [33.2, 30.3, 33.3],
   "Empty, untreated": [1.0, 1.0, 1.0]
 }
+```
+TSV:
+```
+Alt, dex	Ref, dex	Empty, dex	Alt, untreated	Ref, untreated	Empty, untreated
+44.6	149.4	1.1	19.7	33.2	1.0
+37.6	99.7	1.0	16.2	30.3	1.0
+37.7	124.5	0.9	18.3	33.3	1.0
 ```
 ![example ratio plot](https://github.com/anthony-aylward/luciferase/raw/master/example/ratio.png)
 
