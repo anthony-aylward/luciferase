@@ -156,7 +156,7 @@ def luciferase_swarmplot(
     m, sd = luc_data.mean(axis=1), luc_data.std(axis=1)
     luc_data['mean'], luc_data['std'] = m, sd
     if table:
-        luc_data.to_csv(table, sep='\t', index=False)
+        luc_data.to_csv(table, sep='\t')
     luc_data['xrange'] = xrange
 
     sns.set(font_scale=1.5)
