@@ -79,8 +79,8 @@ A second script called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
-luciferase-ratioplot --title Default --xlab control dexamethasone --ylab "Ref:Alt ratio" ratio.json ratio.png
-luciferase-ratioplot --title Inverted --xlab control dexamethasone --ylab "Alt:Ref ratio" --invert ratio.json ratio.png
+luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" --title Default ratio.json ratio.png
+luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --title Inverted --invert ratio.json ratio.png
 ```
 
 The resulting plot shows the estimated allelic ratio of enhancer activity
