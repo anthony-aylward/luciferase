@@ -1,0 +1,35 @@
+\title{Luciferase reporter assay meta-analysis}
+\author{}
+\date{\today}
+\documentclass[12pt]{scrartcl}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+The beta-binomial value for $k$ is:
+\[\int_0^1 L_{n,k}(p)\pi_{\alpha,\beta}(p)dp\]
+
+Let $\Pi_{\alpha,\beta}$ be the integral of $\pi_{\alpha,\beta}$. (with respect
+to R, we have $\pi=\texttt{dbeta()}$, $\Pi=\texttt{pbeta()}$, $\Pi^{-1}=\texttt{qbeta()}$)
+
+By change of variables:
+\begin{align*}
+  \int_0^1 L_{n,k}(\Pi_{\alpha,\beta}^{-1}(u))du &= \int_{\Pi_{\alpha,\beta}(0)}^{\Pi_{\alpha,\beta}(1)} L_{n,k}(\Pi_{\alpha,\beta}^{-1}(u))du \\
+  &= \int_0^1 L_{n,k}(\Pi_{\alpha,\beta}^{-1}(\Pi_{\alpha,\beta}(p)))\pi_{\alpha,\beta}(p)dp \\
+  &= \int_0^1 L_{n,k}(p)\pi_{\alpha,\beta}(p)dp \\
+\end{align*}
+
+I would like to integrate:
+\[\int_0^1 L_{n_1,k_1}(\Pi_{\alpha_1,\beta_1}^{-1}(u))L_{n_2,k_2}(\Pi_{\alpha_2,\beta_2}^{-1}(u))du\]
+
+This is:
+\[\binom{n_1}{k_1}\binom{n_2}{k_2}\int_0^1 \Pi_1^{-1}(u)^{k_1}(1-\Pi_1^{-1}(u))^{n_1-k_1} \Pi_2^{-1}(u)^{k_2}(1-\Pi_2^{-1}(u))^{n_2-k_2}du\]
+Where:
+\[\Pi_i^{-1}(u) = \Pi_{\alpha_i,\beta_i}^{-1}(u)\]
+
+We can probably solve this with adaptive quadrature in R, i.e. \texttt{integrate()}.
+
+
+\end{document}
+This is never printed
