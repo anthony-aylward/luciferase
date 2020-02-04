@@ -54,10 +54,10 @@ Non-risk, Fwd	Risk, Fwd	Non-risk, Rev	Risk, Rev	Empty
 8.506	5.661	12.622	10.598	1.042
 ```
 ```
-Alt, MIN6	Ref, MIN6	Empty, MIN6	Alt, ALPHA-TC6	Ref, ALPHA-TC6	Empty, ALPHA-TC6
-5.47	3.16	1.07	2.5	2.01	1.042
-7.17	3.04	0.83	3.47	1.96	0.92
-6.15	4.34	0.76	3.33	2.31	1.042
+Ref, untreated	Alt, untreated	Empty, untreated	Ref, dex	Alt, dex	Empty, dex
+33.2	19.7	1.0	149.4	44.6	1.1
+30.3	16.2	1.0	99.7	37.6	1.0
+33.3	18.3	1.0	124.5	37.7	0.9
 ```
 
 Significance indicators will be written above the bars: `***` if p<0.001,
