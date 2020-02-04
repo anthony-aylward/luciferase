@@ -30,10 +30,10 @@ JSON_EXAMPLE = """Example of luciferase reporter data in JSON format:
 {
   "Ref, untreated": [33.2, 30.3, 33.3],
   "Alt, untreated": [19.7, 16.2, 18.3],
-  "Empty, untreated": [1.0, 1.0, 1.0]
+  "Empty, untreated": [1.0, 1.0, 1.0],
   "Ref, dex": [149.4, 99.7, 124.5],
   "Alt, dex": [44.6, 37.6, 37.7],
-  "Empty, dex": [1.1, 1.0, 0.9],
+  "Empty, dex": [1.1, 1.0, 0.9]
 }
 
 The number of entries in the input JSON should be a multiple of 3
@@ -141,10 +141,10 @@ def luciferase_ratioplot(
     luc_data = {
         'Ref, untreated': [33.2, 30.3, 33.3],
         'Alt, untreated': [19.7, 16.2, 18.3],
-        'Empty, untreated': [1.0, 1.0, 1.0]
+        'Empty, untreated': [1.0, 1.0, 1.0],
         'Ref, dex': [149.4, 99.7, 124.5],
         'Alt, dex': [44.6, 37.6, 37.7],
-        'Empty, dex': [1.1, 1.0, 0.9],
+        'Empty, dex': [1.1, 1.0, 0.9]
     }
     luciferase.luciferase_ratioplot(
         luc_data,

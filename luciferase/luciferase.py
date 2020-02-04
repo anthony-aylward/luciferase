@@ -265,7 +265,7 @@ def luciferase_barplot(
         sig_indicators = tuple(
             ttest_indicator(a, b) for a, b in (
                 pair
-                for i in range(0, int(len(luc_data.index)), 3)
+                for i in range(0, int(len(luc_data.index)), 5)
                 for pair in (
                     (luc_data.iloc[i], luc_data.iloc[i + 1]),
                     (luc_data.iloc[i + 2], luc_data.iloc[i + 3]),
