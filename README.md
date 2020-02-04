@@ -110,13 +110,17 @@ Alt, dex	Ref, dex	Empty, dex	Alt, untreated	Ref, untreated	Empty, untreated
 
 ## Meta-analysis
 
+For this section, we'll use another included command called
+`luciferase-swarmplot`. It functions exactly like `luciferase-barplot` except
+that individual data points will be plotted over the bars.
+
 It may be that we have performed two or more experiments
 (from separate minipreps) and wish to meta-analyze the results. As an example,
 let's consider the results of two identical experiments on a regulatory
 variant at the _SIX3_ locus: [SIX3-MP0](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp0.json) and [SIX3-MP1](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp1.json). First we'll plot both datasets separately:
 ```sh
-luciferase-barplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP0'
-luciferase-barplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
+luciferase-swarmplot six3-mp0.json six3-mp0.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP0'
+luciferase-swarmplot six3-mp1.json six3-mp1.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-MP1'
 ```
 
 <img src="https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp0.png" width="400"/><img src="https://github.com/anthony-aylward/luciferase/raw/master/example/six3-mp1.png" width="400"/>
@@ -129,7 +133,7 @@ one plot to get the most accurate conclusions about allelic effects.
 
 We might simply combine the data into one dataset, (as [here](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta-nobatch.json)) and plot it:
 ```sh
-luciferase-barplot six3-meta-nobatch.json six3-meta-nobatch.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C'
+luciferase-swarmplot six3-meta-nobatch.json six3-meta-nobatch.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C'
 ```
 
 ![meta-analysis without batch](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta-nobatch.png)
@@ -163,7 +167,7 @@ indicating the batch of each data point, as in this example:
 Here is what the results look like when they're re-normalized to correct for
 batch
 ```sh
-luciferase-barplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-META'
+luciferase-swarmplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED9A6' '#FBB4AE' --dark-colors '#984EA3' '#FF7F00' '#E41A1C' --title 'SIX3-META'
 ```
 
 ![meta-analysis with batch](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta.png)
