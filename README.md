@@ -14,16 +14,18 @@ pip3 install --user luciferase
 
 ### Barplots of enhancer activity
 
-A script called `luciferase-barplot` for creating bar plots from JSON-formatted
-or tabular (TSV) data is included. After installing `luciferase`, you can use
-it like this:
+A script called `luciferase-barplot` for creating bar plots is included.
+After installing `luciferase`, you can use it like this:
 ```sh
 luciferase-barplot example.json example.pdf
-luciferase-barplot example.tsv example.png
-luciferase-barplot example.csv example.svg
+luciferase-barplot example.csv example.png
+luciferase-barplot example.tsv example.svg
 luciferase-barplot example.xls example.pdf
 luciferase-barplot example.xlsx example.png
 ```
+
+JSON, CSV, TSV, or Excel files may be used as inputs, and output
+can be written in PDF, PNG, or SVG.
 
 See also the help message:
 ```sh
@@ -77,8 +79,8 @@ A second script called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
-luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" --title Default ratio.json ratio.png
-luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --title Inverted --invert ratio.json ratio.png
+luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" --title Default ratio.json ratio.pdf
+luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --title Inverted --invert ratio.json ratio.pdf
 ```
 
 The resulting plot shows the estimated allelic ratio of enhancer activity
