@@ -80,8 +80,6 @@ produces a comparative plot of allelic ratios:
 
 ```sh
 luciferase-ratioplot --title Default --xlab control dexamethasone --ylab "Ref:Alt ratio" ratio.json ratio.png
-```
-```sh
 luciferase-ratioplot --title Inverted --xlab control dexamethasone --ylab "Alt:Ref ratio" --invert ratio.json ratio.png
 ```
 
