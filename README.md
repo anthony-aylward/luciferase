@@ -65,8 +65,8 @@ Significance indicators will be written above the bars: `***` if p<0.001,
 
 Here are the resulting plots
 
-![example barplot](https://github.com/anthony-aylward/luciferase/raw/master/example/example-5.svg)
-![example barplot](https://github.com/anthony-aylward/luciferase/raw/master/example/example-6.svg)
+![example barplot](https://github.com/anthony-aylward/luciferase/raw/master/example/example-5.png)
+![example barplot](https://github.com/anthony-aylward/luciferase/raw/master/example/example-6.png)
 
 
 ### Barplots of allelic ratio
