@@ -403,5 +403,6 @@ def main():
         args.output,
         title=args.title,
         dark_color_palette=args.dark_colors,
-        light_color_palette=args.light_colors
+        light_color_palette=args.light_colors,
+        table=args.table
     )
