@@ -145,9 +145,10 @@ results. What gives?
 The answer is that combining data from experiments with different scales
 breaks the assumptions of the significance test (a t-test). To meta-analyze
 these data in a useful way, we first need to re-normalize the two experiments
-to put both of them on the same scale. `luciferase-barplot` will re-normalize
-the data automatically if the dataset includes an additional entry ("Batch")
-indicating the batch of each data point, as in this example:
+to put both of them on the same scale. `luciferase-barplot` and
+`luciferase-swarmplot` will re-normalize the data automatically if the dataset
+includes an additional entry ("Batch") indicating the batch of each data point,
+as in this example:
 [SIX3-META](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta.json).
 ```json
 {
