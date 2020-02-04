@@ -172,7 +172,8 @@ def luciferase_barplot(
     output_file_path: str,
     title: str = '',
     dark_color_palette=DARK_COLOR_PALETTE,
-    light_color_palette=LIGHT_COLOR_PALETTE
+    light_color_palette=LIGHT_COLOR_PALETTE,
+    table=None
 ):
     """Create a barplot from luciferase reporter data
 
@@ -272,6 +273,8 @@ def luciferase_barplot(
         )
     m, sd = luc_data.mean(axis=1), luc_data.std(axis=1)
     luc_data['mean'], luc_data['std'] = m, sd
+    if table:
+        luc_data.to_csv(table, sep='\t', index=False)
     luc_data['xrange'] = xrange
 
     sns.set(font_scale=1.5)
@@ -368,6 +371,11 @@ def parse_arguments():
         nargs='+',
         default=LIGHT_COLOR_PALETTE,
         help='palette of dark colors'
+    )
+    parser.add_argument(
+        '--table',
+        metavar='<path/to/file.tsv>',
+        help='write a table of the data'
     )
     return parser.parse_args()
 

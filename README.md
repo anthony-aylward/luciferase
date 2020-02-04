@@ -69,7 +69,7 @@ Ref, untreated	Alt, untreated	Empty, untreated	Ref, dex	Alt, dex	Empty, dex
 Significance indicators will be written above the bars: `***` if p<0.001,
 `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
 
-Here are the resulting plots
+Here are the resulting plots:
 
 <img src="https://github.com/anthony-aylward/luciferase/raw/master/example/example-5.png" width="400"/><img src="https://github.com/anthony-aylward/luciferase/raw/master/example/example-6.png" width="400"/>
 
@@ -79,8 +79,8 @@ A second tool called `luciferase-ratioplot` takes the same input data and
 produces a comparative plot of allelic ratios:
 
 ```sh
-luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" --title Default ratio.json ratio.pdf
-luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --title Inverted --invert ratio.json ratio.pdf
+luciferase-ratioplot --xlab control dexamethasone --ylab "Ref:Alt ratio" --title Default ratio.json ratio.png
+luciferase-ratioplot --xlab control dexamethasone --ylab "Alt:Ref ratio" --title Inverted --invert ratio.json ratio.png
 ```
 
 The resulting plot shows the estimated allelic ratio of enhancer activity
