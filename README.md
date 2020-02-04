@@ -173,4 +173,4 @@ luciferase-swarmplot six3-meta.json six3-meta.png --light-colors '#DECBE4' '#FED
 
 ![meta-analysis with batch](https://github.com/anthony-aylward/luciferase/raw/master/example/six3-meta.png)
 
-See a more detailed explanation of the normalization procedure [here](https://github.com/anthony-aylward/luciferase/raw/master/example/meta-analysis.pdf)
+See a more detailed explanation of the normalization procedure [here](https://github.com/anthony-aylward/luciferase/blob/master/example/meta-analysis.pdf)
