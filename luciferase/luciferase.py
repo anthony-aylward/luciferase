@@ -190,6 +190,12 @@ def luciferase_barplot(
         Path to the output file
     title : str
         Title to add to plot
+    dark_color_palette
+        Iterable of dark colors
+    light_color_palette
+        Iterable of light colors
+    table : str
+        Filename to write output table
     
     Examples
     --------
