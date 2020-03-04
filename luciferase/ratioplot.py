@@ -100,6 +100,11 @@ def parse_arguments():
         action='store_true',
         help='invert ratios'
     )
+    parser.add_argument(
+        '--table',
+        metavar='<path/to/file.tsv>',
+        help='write a table of the data'
+    )
     return parser.parse_args()
 
 
@@ -111,7 +116,8 @@ def luciferase_ratioplot(
     xlab=None,
     ylab: str = 'Ratio',
     color_palette=LIGHT_COLOR_PALETTE,
-    invert=False
+    invert=False,
+    table=None
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -134,6 +140,9 @@ def luciferase_ratioplot(
         color pallete to use for bars
     invert : bool
         if True, invert ratios
+    table : str
+        path to write tabular data
+        
     
     Examples
     --------
@@ -167,6 +176,8 @@ def luciferase_ratioplot(
         )
         for i in range(0, int(len(luc_data.index)), 3)
     )
+    if table:
+        ratio_data.transpose().to_csv(table, sep='\t', index=False)
     ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
     if not xlab:
         xlab = ['' for _ in range(n_groups)]
@@ -208,5 +219,5 @@ def main():
     luciferase_ratioplot(
         luc_data, args.output, title=args.title, conf=args.conf,
         xlab=args.xlab, ylab=args.ylab, color_palette=args.colors,
-        invert=args.invert
+        invert=args.invert, table=args.table
     )
