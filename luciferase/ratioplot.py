@@ -177,7 +177,7 @@ def luciferase_ratioplot(
         for i in range(0, int(len(luc_data.index)), 3)
     )
     if table:
-        ratio_data.transpose().to_csv(table, sep='\t', index=False)
+        ratio_data.transpose().to_csv(table, sep='\t')
     ratio_data['xrange'] = [.65 + .7 * x for x in range(n_groups)]
     if not xlab:
         xlab = ['' for _ in range(n_groups)]

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='luciferase',
-    version='2.2.1',
+    version='2.2.3',
     author='Anthony Aylward, Joshua Chiou, Mei-Lin Okino',
     author_email='aaylward@eng.ucsd.edu',
     description='Helper functions for luciferase data',
@@ -19,7 +19,7 @@ setuptools.setup(
         "Operating System :: OS Independent"
     ],
     install_requires=[
-        'estimateratio', 'matplotlib', 'pandas', 'scipy', 'seaborn'
+        'estimateratio', 'matplotlib', 'pandas', 'scipy', 'seaborn', 'xlrd'
     ],
     entry_points={
         'console_scripts': [
