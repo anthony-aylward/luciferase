@@ -27,7 +27,7 @@ The first row contains headers and subsequent rows contain firefly/renilla ratio
 
 We can analyze these data by running:
 
-```luciferase-swarmplot example-excel.xlsx example-excel.pdf```
+```luciferase-swarmplot example-excel.xlsx example-excel-plot.pdf```
 
 Here is the result:
 
@@ -35,9 +35,9 @@ Here is the result:
 
 We can also use input data with more columns to produce plots with more bars. For example:
 
-![screenshot of expanded excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-expanded.png)
+![screenshot of expanded excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-expanded-screenshot.png)
 
-```luciferase-swarmplot example-excel-expanded.xlsx example-excel-expanded.pdf```
+```luciferase-swarmplot example-excel-expanded.xlsx example-excel-expanded-plot.pdf```
 
 <img src="https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-expanded-plot.png" width="400"/>
 
