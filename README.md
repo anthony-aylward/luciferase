@@ -39,7 +39,7 @@ We can also use input data with more columns to produce plots with more bars. Fo
 
 ```luciferase-swarmplot example-excel-expanded.xlsx example-excel-expanded.pdf```
 
-![example plot generated from excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-expanded-plot.png)
+<img src="https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-expanded-plot.png" width="400"/>
 
 See the following sections for more details.
 
