@@ -29,6 +29,8 @@ We can analyze these data by running:
 
 ```luciferase-swarmplot example-excel.xlsx example-excel.pdf```
 
+Here is the result:
+
 ![example plot generated from excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-plot.png)
 
 We can also use input data with more columns to produce plots with more bars. For example:
