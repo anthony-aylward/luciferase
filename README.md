@@ -21,7 +21,7 @@ This introduction demonstrates a simple analysis of data in Excel format.
 
 Here is our [example dataset](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel.xlsx), `example-excel.xlsx`:
 
-![screenshot of excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel.png)
+![screenshot of excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-screenshot.png)
 
 The first row contains headers and subsequent rows contain firefly/renilla ratios normalized to the empty vector.
 
