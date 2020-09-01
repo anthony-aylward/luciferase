@@ -15,6 +15,12 @@ pip3 install --user luciferase
 
 ## Command-line interface for barplots
 
+## Introduction
+
+This introduction demonstrates a simple analysis of data in Excel format.
+
+H
+
 ### Barplots of enhancer activity
 
 A command-line tool called `luciferase-barplot` for creating bar plots is
