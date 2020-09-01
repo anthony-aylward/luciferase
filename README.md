@@ -19,7 +19,27 @@ pip3 install --user luciferase
 
 This introduction demonstrates a simple analysis of data in Excel format.
 
-H
+Here is our [example dataset](), `example-excel.xlsx`:
+
+![screenshot of excel data]()
+
+The first row contains headers and subsequent rows contain firefly/renilla ratios normalized to the empty vector.
+
+We can analyze these data by running:
+
+```luciferase-swarmplot example-excel.xlsx example-excel.pdf```
+
+![example plot generated from excel data]()
+
+We can also use input data with more columns to produce plots with more bars. For example:
+
+![screenshot of expanded excel data]()
+
+```luciferase-swarmplot example-excel-expanded.xlsx example-excel-expanded.pdf```
+
+![example plot generated from excel data]()
+
+See the following sections for more details.
 
 ### Barplots of enhancer activity
 
