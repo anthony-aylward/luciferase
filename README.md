@@ -31,7 +31,7 @@ We can analyze these data by running:
 
 Here is the result:
 
-![example plot generated from excel data](https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-plot.png)
+<img src="https://github.com/anthony-aylward/luciferase/raw/master/example/example-excel-plot.png" width="400"/>
 
 We can also use input data with more columns to produce plots with more bars. For example:
 
