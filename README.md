@@ -2,6 +2,9 @@
 Tool for plotting luciferase reporter data. Thanks due to Joshua Chiou and Mei-lin Okino for inspiration and contributions.
 
 ## Installation
+
+To use `luciferase`, you must first have [python3](https://www.python.org/downloads/) installed. Then, you can install `luciferase` using `pip3`:
+
 ```sh
 pip3 install luciferase
 ```
