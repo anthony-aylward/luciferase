@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='luciferase',
-    version='2.2.4',
+    version='2.3.0',
     author='Anthony Aylward, Joshua Chiou, Mei-Lin Okino',
     author_email='aaylward@eng.ucsd.edu',
     description='Helper functions for luciferase data',
@@ -25,7 +25,8 @@ setuptools.setup(
         'console_scripts': [
             'luciferase-barplot=luciferase.luciferase:main',
             'luciferase-ratioplot=luciferase.ratioplot:main',
-            'luciferase-swarmplot=luciferase.swarmplot:main'
+            'luciferase-swarmplot=luciferase.swarmplot:main',
+            'luciferase-ratiotest=luciferase.ratiotest:main'
         ]
     }
 )
