@@ -134,11 +134,11 @@ def luciferase_ratiotest(luc_data: dict, permutations: int):
         for _ in range(permutations)
     )
     observed = test_statistic(calculate_ratios(luc_data))
-    p_value = sum(x >= observed for x in empirical_dist) / len(empirical_dist)
-    print(p_value)
+    return sum(x >= observed for x in empirical_dist) / len(empirical_dist)
 
 
 def main():
     args = parse_arguments()
     luc_data = load_data(args.data)
-    luciferase_ratiotest(luc_data, args.permutations)
+    pval = luciferase_ratiotest(luc_data, args.permutations)
+    print(pval)

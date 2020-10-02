@@ -22,6 +22,7 @@ from estimateratio import estimate_ratio
 from luciferase.luciferase import (
     LIGHT_COLOR_PALETTE, load_data, remove_batch_effect
 )
+from luciferase.ratiotest import luciferase_ratiotest
 
 
 # Constants ====================================================================
@@ -105,7 +106,41 @@ def parse_arguments():
         metavar='<path/to/file.tsv>',
         help='write a table of the data'
     )
+    parser.add_argument(
+        '--test',
+        action='store_true',
+        help='perform a permutation test'
+    )
+    parser.add_argument(
+        '--permutations',
+        metavar='<int>',
+        type=int,
+        default=10_000,
+        help='number of permutations for statistical test'
+    )
     return parser.parse_args()
+
+
+def sig_indicator(pvalue):
+    """Return a significance indicator string for the result of a t-test.
+
+    Parameters
+    ----------
+    pvalue: float
+        the p-value
+    
+    Returns
+    -------
+    str
+        `***` if p<0.001, `**` if p<0.01, `*` if p<0.05, `ns` otherwise.
+    """
+
+    return (
+        '***' if pvalue < 0.001
+        else '**' if pvalue < 0.01
+        else '*' if pvalue < 0.05
+        else 'ns'
+    )
 
 
 def luciferase_ratioplot(
@@ -117,7 +152,9 @@ def luciferase_ratioplot(
     ylab: str = 'Ratio',
     color_palette=LIGHT_COLOR_PALETTE,
     invert=False,
-    table=None
+    table=None,
+    test=False,
+    permutations=10_000
 ):
     """Plot and compare allelic ratios from luciferase reporter data
 
@@ -204,6 +241,27 @@ def luciferase_ratioplot(
         ratio_data['ci_hi'], ratio_data['xrange'] - 0.1,
         ratio_data['xrange'] + 0.1, color='black', lw=2
     )
+    if test:
+        pvalue = luciferase_ratiotest(luc_data, permutations)
+        sig_line_limits = [x for x in ratio_data['xrange'][:2]]
+        max_bar_height = max(ratio_data['ci_hi'])
+        sig_line_height = max_bar_height * 1.1
+        sig_ind_height = max_bar_height * 1.15
+        ax1.hlines(
+            sig_line_height,
+            sig_line_limits[0],
+            sig_line_limits[1],
+            color='black',
+            lw=3
+        )
+        ax1.text(
+            (sig_line_limits[0] + sig_line_limits[1]) / 2,
+            sig_ind_height,
+            sig_indicator(pvalue),
+            ha='center',
+            va='bottom',
+            fontsize=24
+        )
     ax1.set_xticks(ratio_data['xrange'])
     sns.despine(trim=True, offset=10)
     ax1.tick_params(axis='both', length=6, width=1.25, bottom=True, left=True)
@@ -219,5 +277,6 @@ def main():
     luciferase_ratioplot(
         luc_data, args.output, title=args.title, conf=args.conf,
         xlab=args.xlab, ylab=args.ylab, color_palette=args.colors,
-        invert=args.invert, table=args.table
+        invert=args.invert, table=args.table, test=args.test,
+        permutations=args.permutations
     )
